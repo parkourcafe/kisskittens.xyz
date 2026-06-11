@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>VELOUR NOIR — Sensual Touch · 18+</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='11' fill='%230a0a0a'/%3E%3Cg transform='translate(0,3.5)'%3E%3Cpath d='M6 15 C9 10 13 9 16 11 C17.5 12 18.6 13.2 20 14.6 C21.4 13.2 22.5 12 24 11 C27 9 31 10 34 15 C30 13.4 26 13.6 22 14.8 C21 15 19 15 18 14.8 C14 13.6 10 13.4 6 15 Z' fill='%23f4f1ea'/%3E%3Cpath d='M6 15 C11 16.4 15 16.6 20 16.6 C25 16.6 29 16.4 34 15 C32 23 27 28 20 28.5 C13 28 8 23 6 15 Z' fill='%23ED0080'/%3E%3C/g%3E%3C/svg%3E" />
+<link rel="stylesheet" href="kk.css" />
+<style>
+  /* ===== Noir tweaks on top of the house system ===== */
+  .nav .mark .lips{ width:40px; height:34px; flex:none; }
+  .nav .mark .wm{ font-family:var(--disp); font-weight:800; font-size:20px; letter-spacing:-.01em; text-transform:uppercase; display:flex; align-items:baseline; gap:8px; }
+  .nav .mark .wm .noir{ color:var(--pink); font-weight:800; }
+  .age18{ display:inline-flex; align-items:center; justify-content:center; font-family:var(--disp); font-weight:800; font-size:10px; letter-spacing:.04em; border:1.5px solid var(--pink); color:var(--pink); border-radius:999px; padding:4px 10px; line-height:1; }
+
+  /* ===== AIDA stage marker ===== */
+  .stage{ display:flex; align-items:center; gap:14px; margin-bottom:26px; }
+  .stage .dot{ font-family:var(--disp); font-weight:800; font-size:11px; letter-spacing:.04em; color:var(--pink); }
+  .stage .nm{ font-size:10px; font-weight:700; letter-spacing:.34em; text-transform:uppercase; color:var(--grey-2); }
+  .stage .ln{ flex:1; height:1px; background:var(--line); max-width:120px; }
+
+  /* ===== AGE GATE ===== */
+  .gate{ position:fixed; inset:0; z-index:1000; background:rgba(4,4,4,.94); backdrop-filter:blur(18px); display:flex; align-items:center; justify-content:center; padding:28px; opacity:1; transition:opacity .6s var(--ease); }
+  .gate.hide{ opacity:0; pointer-events:none; }
+  .gate .card{ max-width:560px; width:100%; text-align:center; border:1px solid var(--line); background:linear-gradient(180deg,rgba(20,20,20,.9),rgba(8,8,8,.92)); padding:64px 50px; position:relative; overflow:hidden; }
+  .gate .card::before{ content:""; position:absolute; inset:-40%; background:radial-gradient(40% 50% at 50% 0%, rgba(237,0,128,.22), transparent 60%); pointer-events:none; }
+  .gate .lips{ width:62px; height:52px; margin:0 auto 24px; position:relative; }
+  .gate .eighteen{ font-family:var(--disp); font-weight:900; font-size:13px; letter-spacing:.3em; color:var(--pink); text-transform:uppercase; position:relative; }
+  .gate h2{ font-family:var(--disp); font-weight:800; font-size:clamp(30px,4.4vw,46px); text-transform:uppercase; line-height:.96; letter-spacing:-.02em; margin:16px 0 18px; position:relative; }
+  .gate h2 .px{ color:var(--pink); }
+  .gate p{ color:var(--grey-2); font-size:14px; line-height:1.7; max-width:46ch; margin:0 auto 30px; position:relative; }
+  .gate .acts{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap; position:relative; }
+  .gate .fine{ margin-top:26px; font-size:11px; color:var(--grey-3); letter-spacing:.04em; position:relative; }
+
+  /* ===== HERO / ATTENTION ===== */
+  .hero{ position:relative; min-height:100svh; display:flex; align-items:flex-end; overflow:hidden; }
+  .hero .bg{ position:absolute; inset:0; z-index:0; }
+  .hero .bg img, .hero .bg video{ width:100%; height:100%; object-fit:cover; filter:grayscale(.4) contrast(1.08) brightness(.62); transform-origin:center; animation:kenburns 26s ease-in-out infinite alternate; }
+  @keyframes kenburns{ 0%{ transform:scale(1.06) translate(0,0);} 100%{ transform:scale(1.22) translate(-2.5%,-2%);} }
+  .hero .bg::after{ content:""; position:absolute; inset:0; z-index:1; background:linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.18) 32%, rgba(0,0,0,.78) 78%, var(--bg) 100%), linear-gradient(90deg, rgba(0,0,0,.66), transparent 58%); }
+  .hero .bg::before{ content:""; position:absolute; inset:-10%; z-index:1; mix-blend-mode:screen; opacity:.55; background:radial-gradient(38% 50% at 28% 38%, rgba(237,0,128,.36), transparent 60%); animation:heroglow 18s ease-in-out infinite alternate; }
+  @keyframes heroglow{ 0%{ transform:translate(0,0) scale(1); opacity:.4;} 100%{ transform:translate(14%,8%) scale(1.25); opacity:.65;} }
+  .hero-content{ position:relative; z-index:2; padding-bottom:8vh; width:100%; }
+  .hero h1{ font-family:var(--disp); font-weight:800; font-size:clamp(48px,9.4vw,148px); line-height:.85; letter-spacing:-.03em; text-transform:uppercase; max-width:14ch; }
+  .hero h1 .px{ color:var(--pink); font-style:italic; }
+  .hero .ln{ overflow:hidden; display:block; }
+  .hero .ln span{ display:block; transform:translateY(108%); transition:transform 1.05s var(--ease); }
+  .loaded .hero .ln span{ transform:none; } .hero .ln:nth-child(2) span{ transition-delay:.1s; }
+  .hero .sub{ display:flex; align-items:flex-end; justify-content:space-between; gap:40px; margin-top:32px; flex-wrap:wrap; }
+  .hero .lede{ opacity:0; transform:translateY(18px); transition:.9s var(--ease) .5s; max-width:50ch; }
+  .loaded .hero .lede{ opacity:1; transform:none; }
+  .hero .actions{ display:flex; gap:14px; opacity:0; transform:translateY(18px); transition:.9s var(--ease) .65s; flex-wrap:wrap; }
+  .loaded .hero .actions{ opacity:1; transform:none; }
+  .hero .eyebrow{ display:inline-flex; align-items:center; gap:12px; margin-bottom:22px; opacity:0; transition:.9s var(--ease) .4s; }
+  .loaded .hero .eyebrow{ opacity:1; }
+  @media (prefers-reduced-motion:reduce){ .hero .bg img,.hero .bg video{ animation:none;} .hero .bg::before{ animation:none;} }
+
+  /* ===== TICKER ===== */
+  .ticker{ background:var(--pink); color:#fff; padding:15px 0; overflow:hidden; white-space:nowrap; position:relative; z-index:2; }
+  .ticker .track{ display:inline-flex; animation:tick 30s linear infinite; }
+  .ticker span{ font-family:var(--disp); font-weight:700; font-size:14px; letter-spacing:.04em; text-transform:uppercase; padding:0 24px; display:inline-flex; align-items:center; gap:24px; }
+  .ticker span::after{ content:"✦"; font-size:10px; }
+  @keyframes tick{ to{ transform:translateX(-50%);} }
+
+  section.blk{ position:relative; z-index:2; padding:130px 0; background:var(--bg); }
+  section.blk.surface{ background:var(--bg-2); }
+  .head{ display:flex; align-items:flex-end; justify-content:space-between; gap:40px; margin-bottom:60px; flex-wrap:wrap; }
+  .head h2{ font-family:var(--disp); font-weight:800; font-size:clamp(34px,5.2vw,74px); text-transform:uppercase; line-height:.92; letter-spacing:-.02em; max-width:16ch; }
+  .head h2 .px{ color:var(--pink); }
+  .head p{ color:var(--grey-2); max-width:40ch; font-size:15px; }
+
+  /* manifesto / INTEREST */
+  .manifesto{ text-align:center; padding:20px 0; }
+  .manifesto p.big{ font-family:var(--disp); font-weight:700; font-size:clamp(28px,4.6vw,66px); text-transform:uppercase; line-height:1.04; letter-spacing:-.02em; max-width:20ch; margin:0 auto; }
+  .manifesto p.big .px{ color:var(--pink); font-style:italic; }
+  .manifesto .stats{ display:flex; justify-content:center; gap:80px; margin-top:74px; flex-wrap:wrap; }
+  .manifesto .stats .n{ font-family:var(--disp); font-weight:800; font-size:clamp(40px,5vw,66px); color:var(--pink); line-height:1; }
+  .manifesto .stats .t{ font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--grey-2); margin-top:12px; }
+
+  /* why noir — interest differentiators */
+  .why{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); margin-top:14px; }
+  .why .c{ background:var(--bg); padding:46px 36px; }
+  .why .c .ic{ font-family:var(--disp); font-weight:800; font-size:13px; color:var(--pink); letter-spacing:.04em; }
+  .why .c h4{ font-family:var(--disp); font-weight:800; font-size:24px; text-transform:uppercase; margin:18px 0 12px; }
+  .why .c p{ font-size:14px; color:var(--grey-2); line-height:1.65; }
+
+  /* DESIRE — experiences */
+  .rgrid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  .rcard{ background:var(--bg); border:1px solid var(--line); overflow:hidden; display:flex; flex-direction:column; transition:transform .5s var(--ease), border-color .5s; }
+  .rcard:hover{ transform:translateY(-8px); border-color:var(--pink); }
+  .rcard .pic{ position:relative; aspect-ratio:4/3; overflow:hidden; }
+  .rcard .pic img{ width:100%; height:100%; object-fit:cover; filter:grayscale(.55) contrast(1.06) brightness(.66); transition:transform .9s var(--ease), filter .6s; }
+  .rcard:hover .pic img{ transform:scale(1.06); filter:grayscale(.1) brightness(.82); }
+  .rcard .pic .dur{ position:absolute; top:14px; left:14px; background:var(--black); color:var(--pink); font-size:10px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; padding:7px 12px; }
+  .rcard .pic .heat{ position:absolute; top:14px; right:14px; display:flex; gap:3px; }
+  .rcard .pic .heat i{ width:7px; height:7px; border-radius:50%; background:var(--pink); display:block; }
+  .rcard .pic .heat i.off{ background:rgba(255,255,255,.25); }
+  .rcard .body{ padding:26px 26px 30px; display:flex; flex-direction:column; flex:1; }
+  .rcard h3{ font-family:var(--disp); font-weight:800; font-size:26px; text-transform:uppercase; margin-bottom:10px; }
+  .rcard p{ font-size:14px; color:var(--grey-2); margin-bottom:22px; flex:1; line-height:1.6; }
+  .rcard .foot{ display:flex; align-items:center; justify-content:space-between; border-top:1px solid var(--line); padding-top:18px; }
+  .rcard .price{ font-family:var(--disp); font-weight:800; font-size:22px; color:var(--pink); }
+  .rcard .more{ font-size:10px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--grey); display:inline-flex; gap:8px; transition:gap .3s var(--ease),color .3s; }
+  .rcard:hover .more{ gap:13px; color:var(--pink); }
+
+  /* DESIRE — the feeling split */
+  .split{ display:grid; grid-template-columns:1fr 1fr; gap:70px; align-items:center; }
+  .split .vis{ position:relative; aspect-ratio:5/6; overflow:hidden; }
+  .split .vis img{ width:100%; height:100%; object-fit:cover; filter:grayscale(.4) contrast(1.06) brightness(.7); }
+  .split .vis .cap{ position:absolute; bottom:14px; left:14px; background:var(--black); color:#fff; font-size:10px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; padding:8px 13px; }
+  .split .copy h2{ font-family:var(--disp); font-weight:800; font-size:clamp(32px,4.4vw,58px); text-transform:uppercase; line-height:.95; letter-spacing:-.02em; }
+  .split .copy h2 .px{ color:var(--pink); font-style:italic; }
+  .split .copy p{ color:var(--grey-2); margin-top:22px; max-width:46ch; }
+  .split .copy .feats{ margin-top:30px; display:flex; flex-direction:column; }
+  .split .copy .fi{ display:flex; gap:16px; padding:16px 0; border-top:1px solid var(--line); }
+  .split .copy .fi .ic{ font-family:var(--disp); font-weight:800; color:var(--pink); font-size:14px; flex:none; width:28px; }
+  .split .copy .fi h4{ font-size:14px; font-weight:700; letter-spacing:.02em; text-transform:uppercase; margin-bottom:3px; }
+  .split .copy .fi p{ margin:0; font-size:13px; color:var(--grey-2); }
+
+  /* DESIRE — the hands */
+  .tgrid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  .tcard{ position:relative; overflow:hidden; cursor:pointer; }
+  .tcard .pic{ aspect-ratio:3/4; overflow:hidden; }
+  .tcard .pic img{ width:100%; height:100%; object-fit:cover; filter:grayscale(.5) contrast(1.06) brightness(.7); transition:transform .9s var(--ease), filter .5s; }
+  .tcard:hover .pic img{ transform:scale(1.05); filter:grayscale(.1) brightness(.86); }
+  .tcard::after{ content:""; position:absolute; inset:0; background:linear-gradient(180deg,transparent 42%,rgba(0,0,0,.9)); pointer-events:none; }
+  .tcard .info{ position:absolute; left:0; right:0; bottom:0; z-index:2; padding:26px; }
+  .tcard .info .nm{ font-family:var(--disp); font-weight:800; font-size:24px; text-transform:uppercase; }
+  .tcard .info .role{ font-size:10px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--pink); margin-top:6px; }
+
+  /* DESIRE — whispers / proof */
+  .whispers{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  .whisper{ border:1px solid var(--line); background:var(--bg); padding:38px 32px; display:flex; flex-direction:column; gap:20px; }
+  .whisper .q{ font-family:var(--disp); font-weight:700; font-size:21px; line-height:1.3; letter-spacing:-.01em; }
+  .whisper .q .px{ color:var(--pink); }
+  .whisper .by{ font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--grey-3); margin-top:auto; }
+  .whisper .stars{ color:var(--pink); letter-spacing:3px; font-size:12px; }
+
+  /* ACTION — booking */
+  .actionwrap{ display:grid; grid-template-columns:1.15fr 1fr; gap:0; border:1px solid var(--line); }
+  .actionwrap .left{ padding:64px 56px; background:var(--bg-2); }
+  .actionwrap .left h3{ font-family:var(--disp); font-weight:800; font-size:clamp(28px,3.4vw,46px); text-transform:uppercase; line-height:.96; letter-spacing:-.02em; }
+  .actionwrap .left h3 .px{ color:var(--pink); }
+  .actionwrap .left p{ color:var(--grey-2); margin-top:18px; max-width:42ch; font-size:15px; }
+  .steps{ margin-top:34px; display:flex; flex-direction:column; }
+  .steps .s{ display:flex; gap:18px; padding:18px 0; border-top:1px solid var(--line); align-items:flex-start; }
+  .steps .s .n{ font-family:var(--disp); font-weight:800; color:var(--pink); font-size:14px; flex:none; width:30px; }
+  .steps .s h5{ font-size:14px; font-weight:700; letter-spacing:.02em; text-transform:uppercase; margin-bottom:3px; }
+  .steps .s p{ margin:0; font-size:13px; color:var(--grey-2); }
+  .actionwrap .right{ padding:64px 56px; position:relative; overflow:hidden; display:flex; flex-direction:column; justify-content:center; gap:18px; }
+  .actionwrap .right .bgi{ position:absolute; inset:0; z-index:0; }
+  .actionwrap .right .bgi img{ width:100%; height:100%; object-fit:cover; filter:grayscale(.5) contrast(1.06) brightness(.4); }
+  .actionwrap .right .bgi::after{ content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(10,10,10,.6),rgba(10,10,10,.86)); }
+  .actionwrap .right > *{ position:relative; z-index:2; }
+  .actionwrap .right .avail{ display:flex; align-items:center; gap:10px; font-size:11px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:#fff; }
+  .actionwrap .right .avail .pulse{ width:9px; height:9px; border-radius:50%; background:var(--pink); box-shadow:0 0 0 0 rgba(237,0,128,.6); animation:pulse 2s infinite; }
+  @keyframes pulse{ 70%{ box-shadow:0 0 0 12px rgba(237,0,128,0);} 100%{ box-shadow:0 0 0 0 rgba(237,0,128,0);} }
+  .actionwrap .right .bignum{ font-family:var(--disp); font-weight:800; font-size:clamp(38px,4.4vw,60px); text-transform:uppercase; line-height:.96; letter-spacing:-.02em; }
+  .actionwrap .right .bignum .px{ color:var(--pink); }
+  .actionwrap .right p{ color:var(--grey); font-size:14px; max-width:34ch; }
+  .actionwrap .right .guard{ display:flex; align-items:center; gap:10px; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--grey-2); margin-top:6px; }
+
+  /* big closing CTA */
+  .bookcta{ position:relative; overflow:hidden; padding:160px 0; text-align:center; }
+  .bookcta .bg{ position:absolute; inset:0; z-index:0; }
+  .bookcta .bg img, .bookcta .bg video{ width:100%; height:100%; object-fit:cover; filter:grayscale(.5) contrast(1.06) brightness(.36); transform-origin:center; animation:kenburns 28s ease-in-out infinite alternate; }
+  .bookcta .bg::after{ content:""; position:absolute; inset:0; background:radial-gradient(circle at 50% 50%, rgba(237,0,128,.24), transparent 60%); }
+  .bookcta .inner{ position:relative; z-index:2; }
+  .bookcta h2{ font-family:var(--disp); font-weight:900; font-size:clamp(42px,7vw,116px); text-transform:uppercase; line-height:.9; letter-spacing:-.02em; }
+  .bookcta h2 .px{ color:var(--pink); font-style:italic; }
+  .bookcta p{ color:var(--grey); margin:24px auto 38px; max-width:48ch; font-size:17px; }
+  @media (prefers-reduced-motion:reduce){ .bookcta .bg img,.bookcta .bg video{ animation:none; } }
+
+  @media (max-width:1024px){ .split{ grid-template-columns:1fr; gap:40px; } .why{ grid-template-columns:1fr; } .actionwrap{ grid-template-columns:1fr; } }
+  @media (max-width:760px){ section.blk{ padding:90px 0; } .rgrid,.tgrid,.jgrid,.whispers{ grid-template-columns:1fr; } .manifesto .stats{ gap:40px; } .actionwrap .left,.actionwrap .right{ padding:46px 30px; } .gate .card{ padding:48px 28px; } }
+</style>
+</head>
+<body>
+
+<!-- ===================== AGE GATE ===================== -->
+<div class="gate" id="gate" role="dialog" aria-modal="true" aria-label="Adults only">
+  <div class="card">
+    <svg class="lips" viewBox="0 0 40 34" aria-hidden="true"><path d="M6 15 C9 10 13 9 16 11 C17.5 12 18.6 13.2 20 14.6 C21.4 13.2 22.5 12 24 11 C27 9 31 10 34 15 C30 13.4 26 13.6 22 14.8 C21 15 19 15 18 14.8 C14 13.6 10 13.4 6 15 Z" fill="#f4f1ea"/><path d="M6 15 C11 16.4 15 16.6 20 16.6 C25 16.6 29 16.4 34 15 C32 23 27 28 20 28.5 C13 28 8 23 6 15 Z" fill="#ED0080"/></svg>
+    <div class="eighteen">18+ · Adults only</div>
+    <h2>This door is for <span class="px">grown-ups.</span></h2>
+    <p>Velour Noir is a private, sensual massage sanctuary for consenting adults. By entering you confirm you are at least 18 years old and happy to see tasteful, sensual wellness content.</p>
+    <div class="acts">
+      <button class="btn btn-pink" id="gateEnter">I'm 18 or older — enter <span class="ar">→</span></button>
+      <a href="The House.html" class="btn btn-ghost">Take me back</a>
+    </div>
+    <div class="fine">No explicit content. Strictly consensual, by appointment, total discretion.</div>
+  </div>
+</div>
+
+<!-- ===================== NAV ===================== -->
+<nav class="nav" id="nav">
+  <a href="Velour Noir.html" class="mark">
+    <svg class="lips" viewBox="0 0 40 34" aria-hidden="true"><path d="M6 15 C9 10 13 9 16 11 C17.5 12 18.6 13.2 20 14.6 C21.4 13.2 22.5 12 24 11 C27 9 31 10 34 15 C30 13.4 26 13.6 22 14.8 C21 15 19 15 18 14.8 C14 13.6 10 13.4 6 15 Z" fill="#f4f1ea"/><path d="M6 15 C11 16.4 15 16.6 20 16.6 C25 16.6 29 16.4 34 15 C32 23 27 28 20 28.5 C13 28 8 23 6 15 Z" fill="#ED0080"/></svg>
+    <span class="wm">Velour <span class="noir">Noir</span></span>
+  </a>
+  <div class="links">
+    <a href="#interest">The Difference</a><a href="#desire">Experiences</a><a href="#hands">The Hands</a><a href="#proof">Whispers</a><a href="#action">Book</a>
+  </div>
+  <div class="nav-cta"><span class="age18">18+</span><a href="Booking.html" class="btn btn-pink">Book the Noir Hour</a><button class="menu-btn" id="menuBtn" aria-label="Menu">☰</button></div>
+</nav>
+<div class="drawer" id="drawer">
+  <div class="dtop"><span style="font-family:var(--disp);font-weight:800;font-size:18px;text-transform:uppercase;display:flex;gap:10px;align-items:center"><svg width="34" height="29" viewBox="0 0 40 34"><path d="M6 15 C9 10 13 9 16 11 C17.5 12 18.6 13.2 20 14.6 C21.4 13.2 22.5 12 24 11 C27 9 31 10 34 15 C30 13.4 26 13.6 22 14.8 C21 15 19 15 18 14.8 C14 13.6 10 13.4 6 15 Z" fill="#f4f1ea"/><path d="M6 15 C11 16.4 15 16.6 20 16.6 C25 16.6 29 16.4 34 15 C32 23 27 28 20 28.5 C13 28 8 23 6 15 Z" fill="#ED0080"/></svg>Velour Noir</span><button id="closeBtn" style="background:none;border:none;color:#fff;font-size:26px;cursor:pointer">✕</button></div>
+  <div class="dlinks"><a href="#interest">The Difference</a><a href="#desire">Experiences</a><a href="#hands">The Hands</a><a href="#proof">Whispers</a><a href="#action">Book</a></div>
+  <div class="dcta"><a href="Booking.html" class="btn btn-pink">Book the Noir Hour</a></div>
+</div>
+
+<!-- ===================== ATTENTION ===================== -->
+<header class="hero" data-screen-label="Noir / Attention — Hero">
+  <div class="bg">
+    <img src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?w=1900&q=80" alt="" />
+  </div>
+  <div class="hero-content shell">
+    <span class="eyebrow"><span class="age18">18+</span> Velour Noir · The house, after dark</span>
+    <h1><span class="ln"><span>Touch,</span></span><span class="ln"><span>without <span class="px">limits.</span></span></span></h1>
+    <div class="sub">
+      <p class="lede">When the day-house closes, a quieter door opens. Bespoke sensual massage for adults who know exactly what they came for — slow, uninhibited, and entirely discreet. Two hands, your hour, no clock.</p>
+      <div class="actions">
+        <a href="#desire" class="btn btn-pink">See the experiences <span class="ar">→</span></a>
+        <a href="#interest" class="btn btn-ghost">What makes it Noir</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="ticker"><div class="track">
+  <span>Sensual, not explicit</span><span>By appointment</span><span>Total discretion</span><span>Master hands</span><span>Private suites</span><span>Strictly 18+</span>
+  <span>Sensual, not explicit</span><span>By appointment</span><span>Total discretion</span><span>Master hands</span><span>Private suites</span><span>Strictly 18+</span>
+</div></div>
+
+<!-- ===================== INTEREST ===================== -->
+<section class="blk" id="interest" data-screen-label="Noir / Interest — Manifesto">
+  <div class="shell">
+    <div class="stage rv"><span class="dot">02</span><span class="nm">Interest</span><span class="ln"></span></div>
+    <div class="manifesto">
+      <p class="big rv">Most massage ends where the <span class="px">pleasure</span> begins. Ours is only getting <span class="px">started.</span></p>
+      <div class="stats">
+        <div class="rv"><div class="n">3</div><div class="t">Private Noir suites</div></div>
+        <div class="rv d1"><div class="n">9</div><div class="t">Master therapists</div></div>
+        <div class="rv d2"><div class="n">100%</div><div class="t">Discreet, always</div></div>
+        <div class="rv d3"><div class="n">90<span style="font-size:.5em">min</span></div><div class="t">Your shortest hour</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="blk surface" data-screen-label="Noir / Interest — Why Noir">
+  <div class="shell">
+    <div class="head rv"><h2>Sensual is a <span class="px">craft.</span></h2><p>Velour Noir isn't a different menu — it's a different intention. Same masters, same rare oils, far fewer rules. Here's what sets the after-dark hour apart.</p></div>
+    <div class="why">
+      <div class="c rv"><div class="ic">01</div><h4>Led by your body</h4><p>No fixed routine. Your therapist reads breath, heat and tension and follows them — the hour goes exactly as far as you want it to, and not a touch further.</p></div>
+      <div class="c rv d1"><div class="ic">02</div><h4>Unhurried &amp; warm</h4><p>One guest, one suite, no clock on the wall. Warm hand-blended oils, low light and skin-temperature air. The kind of slowness you can't fake.</p></div>
+      <div class="c rv d2"><div class="ic">03</div><h4>Discretion by design</h4><p>An unmarked door, no records kept, no names on a list. You arrive a stranger and leave unremembered by everyone but your own body.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== DESIRE ===================== -->
+<section class="blk" id="desire" data-screen-label="Noir / Desire — Experiences">
+  <div class="shell">
+    <div class="stage rv"><span class="dot">03</span><span class="nm">Desire</span><span class="ln"></span></div>
+    <div class="head rv"><h2>The <span class="px">Noir</span> experiences</h2><p>Four choreographies of warmth, oil and unhurried hands. Choose your hour — the dots show how sensual each one runs.</p></div>
+    <div class="rgrid">
+      <article class="rcard rv"><div class="pic"><img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=900&q=80" alt="" /><span class="dur">90 min</span><span class="heat"><i></i><i></i><i class="off"></i></span></div><div class="body"><h3>Le Velours Noir</h3><p>The signature, undressed. Long enveloping strokes in warm rosewood oil that travel the whole body — the house at its most sensual and complete.</p><div class="foot"><span class="price">€220</span><span class="more">Discover →</span></div></div></article>
+      <article class="rcard rv d1"><div class="pic"><img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?w=900&q=80" alt="" /><span class="dur">75 min</span><span class="heat"><i></i><i></i><i class="off"></i></span></div><div class="body"><h3>Le Souffle</h3><p>A slow, breath-led ritual in the tantric tradition. Stillness, warmth and feather-light touch that builds and lingers. Less about the body, more about the charge.</p><div class="foot"><span class="price">€240</span><span class="more">Discover →</span></div></div></article>
+      <article class="rcard rv d2"><div class="pic"><img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=900&q=80" alt="" /><span class="dur">90 min</span><span class="heat"><i></i><i></i><i></i></span></div><div class="body"><h3>Quatre Mains</h3><p>Two therapists, four hands, one body. Perfectly mirrored, impossible to anticipate — the deepest surrender on the Noir menu.</p><div class="foot"><span class="price">€360</span><span class="more">Discover →</span></div></div></article>
+      <article class="rcard rv d3"><div class="pic"><img src="https://images.unsplash.com/photo-1583416750470-965b2707b355?w=900&q=80" alt="" /><span class="dur">120 min</span><span class="heat"><i></i><i></i><i></i></span></div><div class="body"><h3>Duo Noir</h3><p>Two guests, two tables, one warm room. Share the hour side by side and keep the afterglow. For couples who'd rather not leave anything at the door.</p><div class="foot"><span class="price">€420</span><span class="more">Discover →</span></div></div></article>
+    </div>
+    <div style="margin-top:40px" class="rv"><a href="Rituals.html" class="btn btn-white">See the full menu <span class="ar">→</span></a></div>
+  </div>
+</section>
+
+<!-- DESIRE — the feeling -->
+<section class="blk surface" data-screen-label="Noir / Desire — The Feeling">
+  <div class="shell">
+    <div class="split">
+      <div class="vis rv"><img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=1000&q=80" alt="" /><span class="cap">The Noir Suite</span></div>
+      <div class="copy rv d1">
+        <span class="eyebrow">What the hour feels like</span>
+        <h2 style="margin-top:18px">Permission to feel <span class="px">everything.</span></h2>
+        <p>Behind the unmarked door: low amber light, the scent of neroli and cedar, a room kept exactly at body temperature. No screens, no clocks, no expectation but your own. Just warm oil, slow hands, and an hour where the only thing asked of you is to receive.</p>
+        <div class="feats">
+          <div class="fi"><span class="ic">01</span><div><h4>You set the edge</h4><p>A quiet word before you begin maps exactly how far the hour goes. Yes is yes; everything else simply isn't.</p></div></div>
+          <div class="fi"><span class="ic">02</span><div><h4>Held, not hurried</h4><p>Your therapist follows your breath, not a timer. The hour ends when your body says so.</p></div></div>
+          <div class="fi"><span class="ic">03</span><div><h4>Afterglow included</h4><p>Tea, water, low light and time. You leave when you're ready — never a moment before.</p></div></div>
+        </div>
+        <div style="margin-top:32px"><a href="#action" class="btn btn-ghost">How to book <span class="ar">→</span></a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DESIRE — the hands -->
+<section class="blk" id="hands" data-screen-label="Noir / Desire — The Hands">
+  <div class="shell">
+    <div class="head rv"><h2>The <span class="px">Hands</span></h2><p>Nine master therapists trained in sensual and restorative touch. Choose yours, or let us pair you to your mood.</p></div>
+    <div class="tgrid">
+      <a class="tcard rv" href="Therapists.html"><div class="pic"><img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=800&q=80" alt="" /></div><div class="info"><div class="nm">Élodie</div><div class="role">Signature · Sensual</div></div></a>
+      <a class="tcard rv d1" href="Therapists.html"><div class="pic"><img src="https://images.unsplash.com/photo-1559599101-f09722fb4948?w=800&q=80" alt="" /></div><div class="info"><div class="nm">Mathis</div><div class="role">Le Souffle · Tantric</div></div></a>
+      <a class="tcard rv d2" href="Therapists.html"><div class="pic"><img src="https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?w=800&q=80" alt="" /></div><div class="info"><div class="nm">Saewon</div><div class="role">Quatre Mains · Lead</div></div></a>
+    </div>
+    <div style="margin-top:40px" class="rv"><a href="Therapists.html" class="btn btn-white">Meet the therapists <span class="ar">→</span></a></div>
+  </div>
+</section>
+
+<!-- DESIRE — whispers / social proof -->
+<section class="blk surface" id="proof" data-screen-label="Noir / Desire — Whispers">
+  <div class="shell">
+    <div class="head rv"><h2>What they <span class="px">whisper</span> after</h2><p>Anonymous, every one — discretion runs both ways. A few words guests left behind.</p></div>
+    <div class="whispers">
+      <div class="whisper rv"><div class="stars">✦✦✦✦✦</div><p class="q">"I've had a hundred massages. This was the first one I felt the next <span class="px">morning</span> — in the best possible way."</p><div class="by">Guest · Le Velours Noir</div></div>
+      <div class="whisper rv d1"><div class="stars">✦✦✦✦✦</div><p class="q">"Quatre Mains is a different planet. You stop trying to keep <span class="px">track</span> and just disappear."</p><div class="by">Guest · Quatre Mains</div></div>
+      <div class="whisper rv d2"><div class="stars">✦✦✦✦✦</div><p class="q">"We came as a couple and barely spoke on the way home. We've already <span class="px">rebooked.</span>"</p><div class="by">Guests · Duo Noir</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ACTION ===================== -->
+<section class="blk" id="action" data-screen-label="Noir / Action — Booking">
+  <div class="shell">
+    <div class="stage rv"><span class="dot">04</span><span class="nm">Action</span><span class="ln"></span></div>
+    <div class="actionwrap rv">
+      <div class="left">
+        <h3>Three suites. <span class="px">By appointment only.</span></h3>
+        <p>The Noir hours are limited and quiet by design. Booking takes two minutes — choose your experience, your therapist and your time, and we prepare the rest.</p>
+        <div class="steps">
+          <div class="s"><span class="n">01</span><div><h5>Choose your hour</h5><p>Pick an experience and a therapist — or tell us your mood and we'll pair you.</p></div></div>
+          <div class="s"><span class="n">02</span><div><h5>A quiet word</h5><p>We confirm by message, agree your boundaries, and send the unmarked address.</p></div></div>
+          <div class="s"><span class="n">03</span><div><h5>Arrive &amp; surrender</h5><p>Come ten minutes early for tea. From there, the only thing to do is receive.</p></div></div>
+        </div>
+        <div style="margin-top:34px"><a href="Booking.html" class="btn btn-pink">Book the Noir Hour <span class="ar">→</span></a></div>
+      </div>
+      <div class="right">
+        <div class="bgi"><img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=1200&q=80" alt="" /></div>
+        <div class="avail"><span class="pulse"></span>This week · 4 hours remaining</div>
+        <div class="bignum">Tonight, or<br>not at <span class="px">all.</span></div>
+        <p>Noir suites open Thursday to Sunday, from 7pm. Same-day requests honoured when a master is free.</p>
+        <div class="guard">✦ &nbsp;Discretion guaranteed · no records kept</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- closing CTA -->
+<section class="bookcta" data-screen-label="Noir / Action — Final CTA">
+  <div class="bg">
+    <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=1900&q=80" alt="" />
+  </div>
+  <div class="inner shell">
+    <span class="eyebrow" style="display:inline-flex;align-items:center;gap:12px"><span class="age18">18+</span> By appointment</span>
+    <h2 style="margin-top:20px">Give yourself<br>the <span class="px">Noir hour.</span></h2>
+    <p>Slow, sensual, entirely yours. Choose your experience and your time — we'll keep the light low and the door unmarked.</p>
+    <a href="Booking.html" class="btn btn-pink" style="font-size:13px;padding:20px 42px">Book the Noir Hour <span class="ar">→</span></a>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+  <div class="shell">
+    <div class="top">
+      <div><div class="mark" style="font-family:var(--disp);font-weight:800;font-size:30px;text-transform:uppercase;display:flex;gap:12px;align-items:center"><svg width="40" height="34" viewBox="0 0 40 34"><path d="M6 15 C9 10 13 9 16 11 C17.5 12 18.6 13.2 20 14.6 C21.4 13.2 22.5 12 24 11 C27 9 31 10 34 15 C30 13.4 26 13.6 22 14.8 C21 15 19 15 18 14.8 C14 13.6 10 13.4 6 15 Z" fill="#f4f1ea"/><path d="M6 15 C11 16.4 15 16.6 20 16.6 C25 16.6 29 16.4 34 15 C32 23 27 28 20 28.5 C13 28 8 23 6 15 Z" fill="#ED0080"/></svg>Velour Noir</div><p class="tag">The after-dark wing of the House of Touch. Sensual massage for consenting adults, by appointment — in total discretion. Strictly 18+.</p><div class="social"><a href="#">IG</a><a href="#">TG</a><a href="#">✉</a></div></div>
+      <div><h5>Explore</h5><ul><li><a href="#interest">The Difference</a></li><li><a href="#desire">Experiences</a></li><li><a href="#hands">The Hands</a></li><li><a href="#proof">Whispers</a></li><li><a href="The House.html">The Day House</a></li></ul></div>
+      <div><h5>Visit</h5><ul><li><a href="Booking.html">Book the Noir Hour</a></li><li><a href="Gift.html">Gift the Hour</a></li><li><a href="Contact.html">Contact</a></li><li><a href="FAQ.html">Discretion &amp; FAQ</a></li></ul></div>
+      <div class="news"><h5>The Noir Letter</h5><p>Quiet invitations and seasonal hours. Discreet, occasional, never a sender name you'd have to explain.</p><form onsubmit="return false"><input type="email" placeholder="Your email" /><button>Join</button></form></div>
+    </div>
+    <div class="bottom"><span>© 2026 Velour Noir — House of Touch. Strictly 18+ · By appointment only.</span><div class="lr"><a href="#">Privacy</a><a href="#">Consent</a><a href="FAQ.html">FAQ</a></div></div>
+  </div>
+</footer>
+
+<script>
+  // ---- age gate ----
+  (function(){
+    var gate=document.getElementById('gate');
+    var ok=false; try{ ok=localStorage.getItem('velour_noir_18')==='yes'; }catch(e){}
+    if(ok){ gate.classList.add('hide'); document.body.style.overflow=''; }
+    else{ document.body.style.overflow='hidden'; }
+    document.getElementById('gateEnter').addEventListener('click',function(){
+      try{ localStorage.setItem('velour_noir_18','yes'); }catch(e){}
+      gate.classList.add('hide'); document.body.style.overflow='';
+    });
+  })();
+
+  window.addEventListener('load', ()=> setTimeout(()=>document.body.classList.add('loaded'), 60));
+  document.body.classList.add('loaded');
+  const nav=document.getElementById('nav');
+  addEventListener('scroll',()=>nav.classList.toggle('scrolled', scrollY>40));
+  const drawer=document.getElementById('drawer');
+  document.getElementById('menuBtn').addEventListener('click',()=>drawer.classList.add('open'));
+  document.getElementById('closeBtn').addEventListener('click',()=>drawer.classList.remove('open'));
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>drawer.classList.remove('open')));
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12});
+  document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

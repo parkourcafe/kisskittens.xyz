@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>KISS KITTENS — Lips Mark Study</title>
+<link rel="stylesheet" href="kk.css" />
+<style>
+  body{ padding:0; }
+  .wrap{ max-width:1160px; margin:0 auto; padding:110px 48px 90px; }
+  .htop{ margin-bottom:48px; }
+  .htop .eyebrow{ display:inline-block; margin-bottom:16px; }
+  .htop h1{ font-family:var(--disp); font-weight:900; font-size:clamp(40px,7vw,88px); text-transform:uppercase; line-height:.86; letter-spacing:-.03em; }
+  .htop h1 em{ font-style:normal; color:var(--pink); }
+  .htop p{ color:var(--grey-2); max-width:58ch; margin-top:16px; }
+  .secttl{ font-family:var(--disp); font-weight:800; font-size:18px; text-transform:uppercase; letter-spacing:.02em; margin:0 0 22px; padding-bottom:14px; border-bottom:1px solid var(--line); }
+  .grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:56px; }
+  .tile{ border:1px solid var(--line); overflow:hidden; }
+  .tile .canvas{ height:260px; display:grid; place-items:center; }
+  .tile .canvas svg{ width:150px; height:150px; }
+  .tile .meta{ padding:16px 20px; border-top:1px solid var(--line); display:flex; justify-content:space-between; gap:10px; align-items:center; }
+  .tile .meta .nm{ font-size:13px; font-weight:600; }
+  .tile .meta .tag{ font-size:10px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--grey-3); }
+  .bg-grid{ background:
+    linear-gradient(45deg,#1b1b1b 25%,transparent 25%,transparent 75%,#1b1b1b 75%) 0 0/22px 22px,
+    linear-gradient(45deg,#1b1b1b 25%,transparent 25%,transparent 75%,#1b1b1b 75%) 11px 11px/22px 22px,
+    #141414; }
+  .bg-black{ background:#0a0a0a; } .bg-pink{ background:var(--pink); }
+  .back{ margin-top:8px; }
+  @media (max-width:860px){ .wrap{ padding:90px 22px 70px; } .grid{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="htop">
+    <span class="eyebrow">Mark Study · K as Lips</span>
+    <h1>Two K's,<br>laid as a <em>kiss.</em></h1>
+    <p>Turning the K's horizontal and facing them so they read as a mouth. Same sharp diagonal language as the monogram — just rotated into lips. A few ways to cut it:</p>
+  </div>
+
+  <h2 class="secttl">Explorations</h2>
+  <div class="grid">
+
+    <!-- A: angular stroke lips from K diagonals -->
+    <div class="tile">
+      <div class="canvas bg-grid">
+        <svg viewBox="0 0 40 40"><rect width="40" height="40" rx="11" fill="#ED0080"/>
+          <g fill="none" stroke-width="2.6" stroke-linecap="square" stroke-linejoin="miter">
+            <!-- upper lip: cupid bow from K-style diagonals (ivory) -->
+            <polyline points="8,19 15,12 20,17 25,12 32,19" stroke="#fff"/>
+            <!-- lower lip: wide V (black) -->
+            <polyline points="8,19 20,30 32,19" stroke="#0a0a0a"/>
+          </g>
+        </svg>
+      </div>
+      <div class="meta"><span class="nm">A · Angular</span><span class="tag">Stroke · cupid bow</span></div>
+    </div>
+
+    <!-- B: filled two-tone lips -->
+    <div class="tile">
+      <div class="canvas bg-grid">
+        <svg viewBox="0 0 40 40"><rect width="40" height="40" rx="11" fill="#ED0080"/>
+          <!-- upper lip filled ivory -->
+          <path d="M7 18 L15 11 L20 16 L25 11 L33 18 C28 16 24 16.5 20 17 C16 16.5 12 16 7 18 Z" fill="#fff"/>
+          <!-- lower lip filled black -->
+          <path d="M7 18 C12 19 16 19 20 19 C24 19 28 19 33 18 C30 28 24 31 20 31 C16 31 10 28 7 18 Z" fill="#0a0a0a"/>
+        </svg>
+      </div>
+      <div class="meta"><span class="nm">B · Filled</span><span class="tag">Fuller lips</span></div>
+    </div>
+
+    <!-- C: literal rotated K's facing -->
+    <div class="tile">
+      <div class="canvas bg-grid">
+        <svg viewBox="0 0 40 40"><rect width="40" height="40" rx="11" fill="#ED0080"/>
+          <g stroke-width="3.3" stroke-linecap="square" fill="none">
+            <!-- upper K rotated to horizontal (ivory) -->
+            <g stroke="#fff" transform="rotate(-90 20 20)"><path d="M13 10.5V29.5"/><path d="M13 20L18.4 8"/><path d="M13 20L18.4 32"/></g>
+            <!-- lower K rotated, facing (black) -->
+            <g stroke="#0a0a0a" transform="rotate(90 20 20)"><path d="M13 10.5V29.5"/><path d="M13 20L18.4 8"/><path d="M13 20L18.4 32"/></g>
+          </g>
+        </svg>
+      </div>
+      <div class="meta"><span class="nm">C · Rotated K's</span><span class="tag">Literal</span></div>
+    </div>
+
+  </div>
+
+  <h2 class="secttl">On black &amp; mono</h2>
+  <div class="grid">
+    <div class="tile">
+      <div class="canvas bg-black">
+        <svg viewBox="0 0 40 40">
+          <g fill="none" stroke-width="2.6" stroke-linecap="square" stroke-linejoin="miter">
+            <polyline points="8,19 15,12 20,17 25,12 32,19" stroke="#fff"/>
+            <polyline points="8,19 20,30 32,19" stroke="#ED0080"/>
+          </g>
+        </svg>
+      </div>
+      <div class="meta"><span class="nm">A · on black</span><span class="tag">Ivory + pink</span></div>
+    </div>
+    <div class="tile">
+      <div class="canvas bg-black">
+        <svg viewBox="0 0 40 40">
+          <path d="M7 18 L15 11 L20 16 L25 11 L33 18 C28 16 24 16.5 20 17 C16 16.5 12 16 7 18 Z" fill="#fff"/>
+          <path d="M7 18 C12 19 16 19 20 19 C24 19 28 19 33 18 C30 28 24 31 20 31 C16 31 10 28 7 18 Z" fill="#ED0080"/>
+        </svg>
+      </div>
+      <div class="meta"><span class="nm">B · on black</span><span class="tag">Ivory + pink</span></div>
+    </div>
+    <div class="tile">
+      <div class="canvas bg-pink">
+        <svg viewBox="0 0 40 40">
+          <path d="M7 18 L15 11 L20 16 L25 11 L33 18 C28 16 24 16.5 20 17 C16 16.5 12 16 7 18 Z" fill="#fff"/>
+          <path d="M7 18 C12 19 16 19 20 19 C24 19 28 19 33 18 C30 28 24 31 20 31 C16 31 10 28 7 18 Z" fill="#0a0a0a"/>
+        </svg>
+      </div>
+      <div class="meta"><span class="nm">B · on pink</span><span class="tag">Ivory + black</span></div>
+    </div>
+  </div>
+
+  <div class="back"><a href="Kiss Kittens.html" class="btn btn-ghost">← Back to naming</a></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>KISS KITTENS — The Network</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2040%2040%22%3E%3Crect%20width%3D%2240%22%20height%3D%2240%22%20rx%3D%2211%22%20fill%3D%22%230a0a0a%22%2F%3E%3Cg%20transform%3D%22translate(0%2C3.5)%22%3E%3Cpath%20d%3D%22M6%2015%20C9%2010%2013%209%2016%2011%20C17.5%2012%2018.6%2013.2%2020%2014.6%20C21.4%2013.2%2022.5%2012%2024%2011%20C27%209%2031%2010%2034%2015%20C30%2013.4%2026%2013.6%2022%2014.8%20C21%2015%2019%2015%2018%2014.8%20C14%2013.6%2010%2013.4%206%2015%20Z%22%20fill%3D%22%23f4f1ea%22%2F%3E%3Cpath%20d%3D%22M6%2015%20C11%2016.4%2015%2016.6%2020%2016.6%20C25%2016.6%2029%2016.4%2034%2015%20C32%2023%2027%2028%2020%2028.5%20C13%2028%208%2023%206%2015%20Z%22%20fill%3D%22%23ED0080%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E" />
+<link rel="stylesheet" href="kk.css" />
+<style>
+  .phero{ position:relative; min-height:88svh; display:flex; align-items:center; overflow:hidden; }
+  .phero .bg{ position:absolute; inset:0; z-index:0; }
+  .phero .bg img{ width:100%; height:100%; object-fit:cover; filter:grayscale(.6) contrast(1.08) brightness(.45); }
+  .phero .bg::after{ content:""; position:absolute; inset:0; background:linear-gradient(90deg,rgba(0,0,0,.85),rgba(0,0,0,.3) 70%),linear-gradient(180deg,transparent 60%,var(--bg)); }
+  .phero .inner{ position:relative; z-index:2; width:100%; display:grid; grid-template-columns:1.1fr .9fr; gap:50px; align-items:center; }
+  .phero .eyebrow{ display:inline-block; margin-bottom:20px; }
+  .phero h1{ font-family:var(--disp); font-weight:900; font-size:clamp(48px,8vw,116px); text-transform:uppercase; line-height:.86; letter-spacing:-.03em; }
+  .phero h1 em{ font-style:normal; color:var(--pink); }
+  .phero .lede{ margin-top:24px; }
+  .phero .stores{ display:flex; gap:12px; margin-top:32px; flex-wrap:wrap; }
+  .store{ display:flex; align-items:center; gap:11px; border:1px solid var(--line); padding:12px 22px; transition:.3s var(--ease); background:rgba(0,0,0,.4); }
+  .store:hover{ border-color:var(--pink); }
+  .store .ic{ font-size:22px; }
+  .store .tx{ line-height:1.1; }
+  .store .tx small{ display:block; font-size:9px; letter-spacing:.1em; text-transform:uppercase; color:var(--grey-2); }
+  .store .tx b{ font-family:var(--disp); font-weight:700; font-size:16px; }
+
+  .phone-hero{ position:relative; height:600px; display:flex; align-items:center; justify-content:center; }
+  .phone{ position:absolute; width:300px; height:612px; border-radius:44px; background:#070707; border:1px solid rgba(255,255,255,.16); padding:12px; box-shadow:0 60px 110px -45px #000; }
+  .phone .scr{ position:relative; width:100%; height:100%; border-radius:32px; overflow:hidden; background:#111; }
+  .phone .scr img{ width:100%; height:100%; object-fit:cover; filter:grayscale(.3) contrast(1.05); }
+  .phone .notch{ position:absolute; top:12px; left:50%; transform:translateX(-50%); width:86px; height:7px; background:#000; border-radius:10px; z-index:6; }
+  .phone .ov{ position:absolute; inset:0; z-index:4; display:flex; flex-direction:column; justify-content:flex-end; padding:22px; background:linear-gradient(180deg,transparent 42%,rgba(0,0,0,.82)); }
+  .phone .ov .pill{ align-self:flex-start; background:var(--pink); font-size:9px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; padding:5px 10px; margin-bottom:12px; }
+  .phone .ov h5{ font-family:var(--disp); font-weight:800; font-size:24px; text-transform:uppercase; }
+  .phone .ov p{ font-size:12px; color:var(--grey); margin-top:3px; }
+  .phone .ov .row{ display:flex; gap:9px; margin-top:16px; }
+  .phone .ov .row .b1{ flex:1; text-align:center; background:var(--pink); font-size:10px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:12px; }
+  .phone .ov .row .b2{ width:44px; border:1px solid rgba(255,255,255,.3); display:grid; place-items:center; }
+  .phone.back{ transform:translateX(-110px) translateY(24px) rotate(-9deg) scale(.9); opacity:.55; filter:brightness(.7); }
+  .phone.front{ transform:translateX(70px) rotate(5deg); z-index:5; }
+
+  section.blk{ position:relative; z-index:2; padding:120px 0; background:var(--bg); }
+  section.blk.surface{ background:var(--bg-2); }
+  .head{ text-align:center; max-width:56ch; margin:0 auto 60px; }
+  .head h2{ font-family:var(--disp); font-weight:800; font-size:clamp(32px,5vw,68px); text-transform:uppercase; line-height:.95; letter-spacing:-.02em; }
+  .head p{ color:var(--grey-2); margin-top:16px; }
+
+  .fgrid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); }
+  .fgrid .c{ background:var(--bg); padding:46px 38px; }
+  .fgrid .c .n{ font-family:var(--disp); font-weight:800; font-size:14px; color:var(--pink); letter-spacing:.08em; }
+  .fgrid .c h4{ font-family:var(--disp); font-weight:700; font-size:24px; text-transform:uppercase; margin:18px 0 12px; }
+  .fgrid .c p{ font-size:14px; color:var(--grey-2); line-height:1.6; }
+
+  /* feature split rows */
+  .split{ display:grid; grid-template-columns:1fr 1fr; gap:70px; align-items:center; margin-bottom:30px; }
+  .split.rev .vis{ order:2; }
+  .split .vis{ position:relative; aspect-ratio:5/4; overflow:hidden; }
+  .split .vis img{ width:100%; height:100%; object-fit:cover; filter:grayscale(.5) contrast(1.05) brightness(.8); }
+  .split .copy .eyebrow{ display:inline-block; margin-bottom:14px; }
+  .split .copy h3{ font-family:var(--disp); font-weight:800; font-size:clamp(28px,3.6vw,50px); text-transform:uppercase; line-height:.96; letter-spacing:-.02em; }
+  .split .copy p{ color:var(--grey-2); margin-top:18px; max-width:46ch; }
+
+  .joincta{ position:relative; overflow:hidden; padding:140px 0; text-align:center; }
+  .joincta .bg{ position:absolute; inset:0; z-index:0; }
+  .joincta .bg img{ width:100%; height:100%; object-fit:cover; filter:grayscale(.7) contrast(1.1) brightness(.4); }
+  .joincta .inner{ position:relative; z-index:2; }
+  .joincta h2{ font-family:var(--disp); font-weight:900; font-size:clamp(40px,7vw,104px); text-transform:uppercase; line-height:.9; letter-spacing:-.02em; }
+  .joincta h2 em{ font-style:normal; color:var(--pink); }
+  .joincta p{ color:var(--grey); margin:24px auto 36px; max-width:44ch; }
+
+  @media (max-width:1024px){ .phero .inner{ grid-template-columns:1fr; } .phone-hero{ height:520px; margin-top:20px; } }
+  @media (max-width:860px){ .fgrid{ grid-template-columns:1fr; } .split,.split.rev .vis{ grid-template-columns:1fr; order:0; } .split{ gap:34px; } .phone.back{ display:none; } .phone.front{ transform:none; position:relative; } .phone-hero{ height:auto; } }
+</style>
+</head>
+<body>
+<nav class="nav" id="nav">
+  <a href="Home.html" class="mark"><span class="kk"><svg viewBox="0 0 40 40" aria-hidden="true"><g transform="translate(0,1.5)"><path d="M6 15 C9 10 13 9 16 11 C17.5 12 18.6 13.2 20 14.6 C21.4 13.2 22.5 12 24 11 C27 9 31 10 34 15 C30 13.4 26 13.6 22 14.8 C21 15 19 15 18 14.8 C14 13.6 10 13.4 6 15 Z" fill="#f4f1ea"/><path d="M6 15 C11 16.4 15 16.6 20 16.6 C25 16.6 29 16.4 34 15 C32 23 27 28 20 28.5 C13 28 8 23 6 15 Z" fill="#ED0080"/></g></svg></span><span style="color:#ED0080">KISS</span> KITTENS</a>
+  <div class="links"><a href="Parties.html">Parties</a><a href="Membership.html">Membership</a><a href="Network.html" class="active">The Network</a><a href="Magazine.html">Magazine</a><a href="About.html">About</a></div>
+  <div class="nav-cta"><a href="Membership.html" class="btn btn-pink">Become a Member</a><button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button></div>
+</nav>
+<div class="drawer" id="drawer">
+  <div class="dtop"><span class="mark" style="font-family:var(--disp);font-weight:900;font-size:18px;display:flex;gap:9px;align-items:center"><span class="kk-d"><svg viewBox="0 0 40 40" aria-hidden="true"><g transform="translate(0,1.5)"><path d="M6 15 C9 10 13 9 16 11 C17.5 12 18.6 13.2 20 14.6 C21.4 13.2 22.5 12 24 11 C27 9 31 10 34 15 C30 13.4 26 13.6 22 14.8 C21 15 19 15 18 14.8 C14 13.6 10 13.4 6 15 Z" fill="#f4f1ea"/><path d="M6 15 C11 16.4 15 16.6 20 16.6 C25 16.6 29 16.4 34 15 C32 23 27 28 20 28.5 C13 28 8 23 6 15 Z" fill="#ED0080"/></g></svg></span><span style="color:#ED0080">KISS</span> KITTENS</span><button id="closeBtn" style="display:block;background:none;border:none;color:#fff;font-size:26px;cursor:pointer">✕</button></div>
+  <div class="dlinks"><a href="Parties.html">Parties</a><a href="Membership.html">Membership</a><a href="Network.html">The Network</a><a href="Magazine.html">Magazine</a><a href="About.html">About</a></div>
+  <div class="dcta"><a href="Membership.html" class="btn btn-pink">Become a Member</a></div>
+</div>
+
+<header class="phero" data-screen-label="Network / Hero">
+  <div class="bg"><img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=1900&q=80" alt="" /></div>
+  <div class="inner shell">
+    <div>
+      <span class="eyebrow">KK Connect</span>
+      <h1>The members'<br><em>network.</em></h1>
+      <p class="lede">More than an app — it's the social network for our community. Meet women near you, join the conversation, and carry the society in your pocket.</p>
+      <div class="stores">
+        <a class="store"><span class="ic"></span><span class="tx"><small>Download on the</small><b>App Store</b></span></a>
+        <a class="store"><span class="ic">▶</span><span class="tx"><small>Get it on</small><b>Google Play</b></span></a>
+      </div>
+    </div>
+    <div class="phone-hero">
+      <div class="phone back"><div class="notch"></div><div class="scr"><img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=700&q=80" alt="" /></div></div>
+      <div class="phone front"><div class="notch"></div><div class="scr">
+        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=700&q=80" alt="" />
+        <div class="ov"><span class="pill">● Verified · 3 mutual</span><h5>Saskia, 28</h5><p>London · here for the Mayfair party</p><div class="row"><div class="b1">Connect</div><div class="b2">♡</div></div></div>
+      </div></div>
+    </div>
+  </div>
+</header>
+
+<section class="blk" data-screen-label="Network / Features">
+  <div class="shell">
+    <div class="head"><h2>Built women-first</h2><p>Every feature is designed around safety, control and real connection — the way it should have been all along.</p></div>
+    <div class="fgrid">
+      <div class="c"><div class="n">01</div><h4>Verified Only</h4><p>Every member is approved by hand. Real people, real intent, a safe space by design — no bots, no catfish.</p></div>
+      <div class="c"><div class="n">02</div><h4>You're in Control</h4><p>Private profiles, blur-until-you-allow, and granular privacy. You decide exactly who gets to see you.</p></div>
+      <div class="c"><div class="n">03</div><h4>Feed to Front Door</h4><p>Match, chat, then meet at the next masked party. The network and the nights, finally in one place.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="blk surface" data-screen-label="Network / Detail 1">
+  <div class="shell">
+    <div class="split">
+      <div class="vis"><img src="https://images.unsplash.com/photo-1485872299829-c673f5194813?w=1000&q=80" alt="" /></div>
+      <div class="copy">
+        <span class="eyebrow">Discover</span>
+        <h3>Meet women<br>worth knowing.</h3>
+        <p>Browse a curated network of verified members near you or in any city you're headed to. No endless swiping — just people who actually show up, behind a community that has your back.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="blk" data-screen-label="Network / Detail 2">
+  <div class="shell">
+    <div class="split rev">
+      <div class="vis"><img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=1000&q=80" alt="" /></div>
+      <div class="copy">
+        <span class="eyebrow">Connect</span>
+        <h3>Conversations<br>that go somewhere.</h3>
+        <p>Groups, events and DMs built for genuine connection. Plan your night together, find your people, and turn a chat into a table at the next party with one tap.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="joincta" data-screen-label="Network / CTA">
+  <div class="bg"><img src="https://images.unsplash.com/photo-1543007630-9710e4a00a20?w=1900&q=80" alt="" /></div>
+  <div class="inner shell">
+    <h2>Download <em>KK Connect.</em></h2>
+    <p>Free to join. Apply, get verified, and meet the network the world's been talking about.</p>
+    <a href="Membership.html" class="btn btn-pink" style="font-size:14px;padding:20px 42px">Apply Free <span class="ar">→</span></a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="shell">
+    <div class="top">
+      <div><div class="mark"><span class="kk-f"><svg viewBox="0 0 40 40" aria-hidden="true"><g transform="translate(0,1.5)"><path d="M6 15 C9 10 13 9 16 11 C17.5 12 18.6 13.2 20 14.6 C21.4 13.2 22.5 12 24 11 C27 9 31 10 34 15 C30 13.4 26 13.6 22 14.8 C21 15 19 15 18 14.8 C14 13.6 10 13.4 6 15 Z" fill="#f4f1ea"/><path d="M6 15 C11 16.4 15 16.6 20 16.6 C25 16.6 29 16.4 34 15 C32 23 27 28 20 28.5 C13 28 8 23 6 15 Z" fill="#ED0080"/></g></svg></span><span style="color:#ED0080">KISS</span> KITTENS</div><p class="tag">The world's most exclusive parties and members' network — created by women, for women. Since 2005.</p><div class="social"><a href="#">IG</a><a href="#">X</a><a href="#">TT</a><a href="#">IN</a></div></div>
+      <div><h5>Explore</h5><ul><li><a href="Parties.html">Parties</a></li><li><a href="Membership.html">Membership</a></li><li><a href="Network.html">The Network</a></li><li><a href="Magazine.html">Magazine</a></li><li><a href="About.html">About</a></li></ul></div>
+      <div><h5>Members</h5><ul><li><a href="Membership.html">Apply Now</a></li><li><a href="#">Sign In</a></li><li><a href="Network.html">The App</a></li><li><a href="About.html">FAQ</a></li><li><a href="#">Contact</a></li></ul></div>
+      <div class="news"><h5>Get on the list</h5><p>Party drops, member stories and the occasional secret.</p><form onsubmit="return false"><input type="email" placeholder="Your email" /><button>Join</button></form></div>
+    </div>
+    <div class="bottom"><span>© 2026 Kiss Kittens — visual concept recreation. No affiliation; original wordmark &amp; placeholder imagery.</span><div class="lr"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Cookies</a></div></div>
+  </div>
+</footer>
+
+<script>
+  const nav=document.getElementById('nav');
+  addEventListener('scroll',()=>nav.classList.toggle('scrolled', scrollY>40));
+  const drawer=document.getElementById('drawer');
+  document.getElementById('menuBtn').addEventListener('click',()=>drawer.classList.add('open'));
+  document.getElementById('closeBtn').addEventListener('click',()=>drawer.classList.remove('open'));
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>drawer.classList.remove('open')));
+</script>
+</body>
+</html>

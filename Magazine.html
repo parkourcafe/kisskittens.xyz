@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>KISS KITTENS — The Magazine</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2040%2040%22%3E%3Crect%20width%3D%2240%22%20height%3D%2240%22%20rx%3D%2211%22%20fill%3D%22%230a0a0a%22%2F%3E%3Cg%20transform%3D%22translate(0%2C3.5)%22%3E%3Cpath%20d%3D%22M6%2015%20C9%2010%2013%209%2016%2011%20C17.5%2012%2018.6%2013.2%2020%2014.6%20C21.4%2013.2%2022.5%2012%2024%2011%20C27%209%2031%2010%2034%2015%20C30%2013.4%2026%2013.6%2022%2014.8%20C21%2015%2019%2015%2018%2014.8%20C14%2013.6%2010%2013.4%206%2015%20Z%22%20fill%3D%22%23f4f1ea%22%2F%3E%3Cpath%20d%3D%22M6%2015%20C11%2016.4%2015%2016.6%2020%2016.6%20C25%2016.6%2029%2016.4%2034%2015%20C32%2023%2027%2028%2020%2028.5%20C13%2028%208%2023%206%2015%20Z%22%20fill%3D%22%23ED0080%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E" />
+<link rel="stylesheet" href="kk.css" />
+<style>
+  .mhead{ padding:140px 0 50px; }
+  .mhead .eyebrow{ display:inline-block; margin-bottom:18px; }
+  .mhead h1{ font-family:var(--disp); font-weight:900; font-size:clamp(54px,11vw,150px); text-transform:uppercase; line-height:.86; letter-spacing:-.03em; }
+  .mhead h1 em{ font-style:normal; color:var(--pink); }
+  .mhead p{ color:var(--grey-2); max-width:50ch; margin-top:18px; }
+
+  .cats{ display:flex; gap:10px; padding:8px 0 0; flex-wrap:wrap; border-bottom:1px solid var(--line); padding-bottom:26px; }
+  .chip{ font-family:var(--sans); font-size:11px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; padding:10px 18px; border:1px solid var(--line); background:transparent; color:var(--grey); cursor:pointer; transition:.3s var(--ease); }
+  .chip:hover{ border-color:var(--pink); color:var(--white); }
+  .chip.active{ background:var(--pink); color:var(--white); border-color:var(--pink); }
+
+  section.blk{ position:relative; z-index:2; padding:70px 0 120px; background:var(--bg); }
+
+  /* feature article */
+  .feat{ display:grid; grid-template-columns:1.2fr 1fr; gap:0; border:1px solid var(--line); overflow:hidden; margin-bottom:56px; cursor:pointer; }
+  .feat .pic{ position:relative; min-height:440px; overflow:hidden; }
+  .feat .pic img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:grayscale(.4) contrast(1.05) brightness(.8); transition:transform .9s var(--ease); }
+  .feat:hover .pic img{ transform:scale(1.05); }
+  .feat .cat{ position:absolute; top:22px; left:22px; background:var(--pink); color:#fff; font-size:10px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; padding:7px 13px; z-index:2; }
+  .feat .body{ padding:54px 50px; display:flex; flex-direction:column; justify-content:center; background:var(--bg-2); }
+  .feat .body .meta{ font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--grey-3); margin-bottom:16px; }
+  .feat .body h2{ font-family:var(--disp); font-weight:800; font-size:clamp(28px,3.4vw,48px); text-transform:uppercase; line-height:.98; letter-spacing:-.02em; }
+  .feat .body p{ color:var(--grey-2); margin-top:18px; max-width:46ch; }
+  .feat .body .more{ margin-top:26px; font-size:11px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--pink); display:inline-flex; gap:8px; }
+
+  .bgrid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px 16px; }
+  .bcard{ cursor:pointer; }
+  .bcard.hide{ display:none; }
+  .bcard .pic{ position:relative; aspect-ratio:4/3; overflow:hidden; margin-bottom:20px; }
+  .bcard .pic img{ width:100%; height:100%; object-fit:cover; transition:transform .8s var(--ease); filter:grayscale(.4) contrast(1.05) brightness(.85); }
+  .bcard:hover .pic img{ transform:scale(1.06); }
+  .bcard .cat{ position:absolute; top:14px; left:14px; background:var(--black); color:var(--pink); font-size:10px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; padding:6px 12px; }
+  .bcard .meta{ font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--grey-3); margin-bottom:10px; }
+  .bcard h4{ font-family:var(--disp); font-weight:700; font-size:23px; text-transform:uppercase; line-height:1.02; margin-bottom:10px; transition:color .3s; }
+  .bcard:hover h4{ color:var(--pink); }
+  .bcard p{ font-size:14px; color:var(--grey-2); }
+
+  .joincta{ position:relative; overflow:hidden; padding:130px 0; text-align:center; margin-top:30px; }
+  .joincta .bg{ position:absolute; inset:0; z-index:0; }
+  .joincta .bg img{ width:100%; height:100%; object-fit:cover; filter:grayscale(.7) contrast(1.1) brightness(.4); }
+  .joincta .inner{ position:relative; z-index:2; }
+  .joincta h2{ font-family:var(--disp); font-weight:900; font-size:clamp(38px,6vw,92px); text-transform:uppercase; line-height:.9; letter-spacing:-.02em; }
+  .joincta h2 em{ font-style:normal; color:var(--pink); }
+  .joincta p{ color:var(--grey); margin:22px auto 34px; max-width:44ch; }
+
+  @media (max-width:860px){ .feat{ grid-template-columns:1fr; } .feat .pic{ min-height:280px; } .bgrid{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<nav class="nav scrolled" id="nav">
+  <a href="Home.html" class="mark"><span class="kk"><svg viewBox="0 0 40 40" aria-hidden="true"><g transform="translate(0,1.5)"><path d="M6 15 C9 10 13 9 16 11 C17.5 12 18.6 13.2 20 14.6 C21.4 13.2 22.5 12 24 11 C27 9 31 10 34 15 C30 13.4 26 13.6 22 14.8 C21 15 19 15 18 14.8 C14 13.6 10 13.4 6 15 Z" fill="#f4f1ea"/><path d="M6 15 C11 16.4 15 16.6 20 16.6 C25 16.6 29 16.4 34 15 C32 23 27 28 20 28.5 C13 28 8 23 6 15 Z" fill="#ED0080"/></g></svg></span><span style="color:#ED0080">KISS</span> KITTENS</a>
+  <div class="links"><a href="Parties.html">Parties</a><a href="Membership.html">Membership</a><a href="Network.html">The Network</a><a href="Magazine.html" class="active">Magazine</a><a href="About.html">About</a></div>
+  <div class="nav-cta"><a href="Membership.html" class="btn btn-pink">Become a Member</a><button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button></div>
+</nav>
+<div class="drawer" id="drawer">
+  <div class="dtop"><span class="mark" style="font-family:var(--disp);font-weight:900;font-size:18px;display:flex;gap:9px;align-items:center"><span class="kk-d"><svg viewBox="0 0 40 40" aria-hidden="true"><g transform="translate(0,1.5)"><path d="M6 15 C9 10 13 9 16 11 C17.5 12 18.6 13.2 20 14.6 C21.4 13.2 22.5 12 24 11 C27 9 31 10 34 15 C30 13.4 26 13.6 22 14.8 C21 15 19 15 18 14.8 C14 13.6 10 13.4 6 15 Z" fill="#f4f1ea"/><path d="M6 15 C11 16.4 15 16.6 20 16.6 C25 16.6 29 16.4 34 15 C32 23 27 28 20 28.5 C13 28 8 23 6 15 Z" fill="#ED0080"/></g></svg></span><span style="color:#ED0080">KISS</span> KITTENS</span><button id="closeBtn" style="display:block;background:none;border:none;color:#fff;font-size:26px;cursor:pointer">✕</button></div>
+  <div class="dlinks"><a href="Parties.html">Parties</a><a href="Membership.html">Membership</a><a href="Network.html">The Network</a><a href="Magazine.html">Magazine</a><a href="About.html">About</a></div>
+  <div class="dcta"><a href="Membership.html" class="btn btn-pink">Become a Member</a></div>
+</div>
+
+<div class="shell">
+  <div class="mhead">
+    <span class="eyebrow">The Magazine</span>
+    <h1>Stories from<br>the <em>inside.</em></h1>
+    <p>Sex-positive essays, dispatches from our parties, and the conversations no one else is brave enough to have.</p>
+  </div>
+  <div class="cats">
+    <button class="chip active" data-cat="all">All</button>
+    <button class="chip" data-cat="empowerment">Empowerment</button>
+    <button class="chip" data-cat="parties">Parties</button>
+    <button class="chip" data-cat="network">The Network</button>
+    <button class="chip" data-cat="culture">Culture</button>
+  </div>
+</div>
+
+<section class="blk" data-screen-label="Magazine / Feed">
+  <div class="shell">
+    <!-- featured -->
+    <article class="feat">
+      <div class="pic"><img src="https://images.unsplash.com/photo-1485872299829-c673f5194813?w=1200&q=80" alt="" /><span class="cat">Empowerment</span></div>
+      <div class="body">
+        <div class="meta">Featured · 6 min read</div>
+        <h2>Reclaiming the<br>word "more."</h2>
+        <p>Why wanting more — pleasure, connection, freedom, space — is the most quietly radical thing a woman can do. Our founder on twenty years of building rooms where "more" is the whole point.</p>
+        <span class="more">Read the essay →</span>
+      </div>
+    </article>
+
+    <div class="bgrid" id="bgrid">
+      <article class="bcard" data-cat="parties">
+        <div class="pic"><img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=800&q=80" alt="" /><span class="cat">Parties</span></div>
+        <div class="meta">14 Jun · 4 min</div>
+        <h4>Inside a KK Masked Night</h4>
+        <p>What really happens behind the mask — etiquette, consent, and the strange magic of anonymity.</p>
+      </article>
+      <article class="bcard" data-cat="network">
+        <div class="pic"><img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=800&q=80" alt="" /><span class="cat">The Network</span></div>
+        <div class="meta">09 Jun · 5 min</div>
+        <h4>Dating, On Her Terms</h4>
+        <p>How women-first design is rewriting the rules of meeting someone real online.</p>
+      </article>
+      <article class="bcard" data-cat="empowerment">
+        <div class="pic"><img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=800&q=80" alt="" /><span class="cat">Empowerment</span></div>
+        <div class="meta">02 Jun · 7 min</div>
+        <h4>The Confidence Myth</h4>
+        <p>Confidence isn't loud. Five members on what it actually feels like to take up space.</p>
+      </article>
+      <article class="bcard" data-cat="culture">
+        <div class="pic"><img src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=800&q=80" alt="" /><span class="cat">Culture</span></div>
+        <div class="meta">28 May · 3 min</div>
+        <h4>A Short History of the Mask</h4>
+        <p>From Venetian balls to Mayfair townhouses — why anonymity has always meant freedom.</p>
+      </article>
+      <article class="bcard" data-cat="parties">
+        <div class="pic"><img src="https://images.unsplash.com/photo-1543007630-9710e4a00a20?w=800&q=80" alt="" /><span class="cat">Parties</span></div>
+        <div class="meta">21 May · 4 min</div>
+        <h4>How to Host a Night</h4>
+        <p>Our Icon members on throwing the kind of party people whisper about for years.</p>
+      </article>
+      <article class="bcard" data-cat="culture">
+        <div class="pic"><img src="https://images.unsplash.com/photo-1496440737103-cd596325d314?w=800&q=80" alt="" /><span class="cat">Culture</span></div>
+        <div class="meta">15 May · 6 min</div>
+        <h4>Consent Is the Whole Vibe</h4>
+        <p>Why the sexiest thing in any room is an enthusiastic, unmistakable yes.</p>
+      </article>
+    </div>
+    <p id="noresult" style="display:none;text-align:center;color:var(--grey-3);padding:40px 0">No stories in that category yet.</p>
+  </div>
+</section>
+
+<section class="joincta" data-screen-label="Magazine / CTA">
+  <div class="bg"><img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=1900&q=80" alt="" /></div>
+  <div class="inner shell">
+    <h2>Never miss a <em>word.</em></h2>
+    <p>Join the list for new stories, party drops and the occasional secret — straight to your inbox.</p>
+    <a href="Membership.html" class="btn btn-pink" style="font-size:14px;padding:20px 42px">Become a Member <span class="ar">→</span></a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="shell">
+    <div class="top">
+      <div><div class="mark"><span class="kk-f"><svg viewBox="0 0 40 40" aria-hidden="true"><g transform="translate(0,1.5)"><path d="M6 15 C9 10 13 9 16 11 C17.5 12 18.6 13.2 20 14.6 C21.4 13.2 22.5 12 24 11 C27 9 31 10 34 15 C30 13.4 26 13.6 22 14.8 C21 15 19 15 18 14.8 C14 13.6 10 13.4 6 15 Z" fill="#f4f1ea"/><path d="M6 15 C11 16.4 15 16.6 20 16.6 C25 16.6 29 16.4 34 15 C32 23 27 28 20 28.5 C13 28 8 23 6 15 Z" fill="#ED0080"/></g></svg></span><span style="color:#ED0080">KISS</span> KITTENS</div><p class="tag">The world's most exclusive parties and members' network — created by women, for women. Since 2005.</p><div class="social"><a href="#">IG</a><a href="#">X</a><a href="#">TT</a><a href="#">IN</a></div></div>
+      <div><h5>Explore</h5><ul><li><a href="Parties.html">Parties</a></li><li><a href="Membership.html">Membership</a></li><li><a href="Network.html">The Network</a></li><li><a href="Magazine.html">Magazine</a></li><li><a href="About.html">About</a></li></ul></div>
+      <div><h5>Members</h5><ul><li><a href="Membership.html">Apply Now</a></li><li><a href="#">Sign In</a></li><li><a href="Network.html">The App</a></li><li><a href="About.html">FAQ</a></li><li><a href="#">Contact</a></li></ul></div>
+      <div class="news"><h5>Get on the list</h5><p>Party drops, member stories and the occasional secret.</p><form onsubmit="return false"><input type="email" placeholder="Your email" /><button>Join</button></form></div>
+    </div>
+    <div class="bottom"><span>© 2026 Kiss Kittens — visual concept recreation. No affiliation; original wordmark &amp; placeholder imagery.</span><div class="lr"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Cookies</a></div></div>
+  </div>
+</footer>
+
+<script>
+  const nav=document.getElementById('nav');
+  addEventListener('scroll',()=>nav.classList.toggle('scrolled', scrollY>40 || true));
+  const drawer=document.getElementById('drawer');
+  document.getElementById('menuBtn').addEventListener('click',()=>drawer.classList.add('open'));
+  document.getElementById('closeBtn').addEventListener('click',()=>drawer.classList.remove('open'));
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>drawer.classList.remove('open')));
+  const chips=document.querySelectorAll('.chip'); const cards=document.querySelectorAll('.bcard'); const noresult=document.getElementById('noresult');
+  chips.forEach(c=>c.addEventListener('click',()=>{
+    chips.forEach(x=>x.classList.remove('active')); c.classList.add('active');
+    const cat=c.dataset.cat; let shown=0;
+    cards.forEach(card=>{ const m=cat==='all'||card.dataset.cat===cat; card.classList.toggle('hide',!m); if(m)shown++; });
+    noresult.style.display=shown?'none':'block';
+  }));
+</script>
+</body>
+</html>

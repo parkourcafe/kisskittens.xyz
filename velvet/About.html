@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>VELVET — About</title>
+<link rel="stylesheet" href="velvet.css" />
+<style>
+  .phero{ position:relative; min-height:78svh; display:flex; align-items:flex-end; overflow:hidden; color:var(--cream); }
+  .phero .inner{ position:relative; z-index:3; padding-bottom:8vh; width:100%; }
+  .phero h1{ font-family:var(--serif); font-weight:400; font-size:clamp(54px,9vw,150px); line-height:.9; margin:16px 0 16px; max-width:16ch; }
+  .phero h1 em{ font-style:italic; color:var(--rose-soft); }
+  .phero p{ color:rgba(244,239,231,.88); max-width:50ch; font-size:clamp(16px,1.3vw,19px); }
+
+  section.blk{ position:relative; z-index:2; background:var(--paper); padding:110px 0; }
+  section.blk.white{ background:var(--white); }
+
+  /* manifesto */
+  .manifesto{ max-width:920px; margin:0 auto; text-align:center; }
+  .manifesto .kicker{ justify-content:center; margin-bottom:30px; }
+  .manifesto p{ font-family:var(--serif); font-size:clamp(26px,3.4vw,46px); font-weight:400; line-height:1.22; color:var(--ink); }
+  .manifesto p em{ font-style:italic; color:var(--rose); }
+  .manifesto .sig{ margin-top:40px; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:var(--mist); }
+
+  /* story split */
+  .story{ display:grid; grid-template-columns:1fr 1fr; gap:70px; align-items:center; }
+  .story .pic{ position:relative; aspect-ratio:4/5; overflow:hidden; }
+  .story .pic img{ width:100%; height:100%; object-fit:cover; }
+  .story .pic .chip{ position:absolute; bottom:16px; left:16px; background:rgba(15,10,13,.6); backdrop-filter:blur(6px); color:var(--cream); font-size:11px; letter-spacing:.16em; text-transform:uppercase; padding:9px 14px; }
+  .story h2{ font-family:var(--serif); font-size:clamp(30px,3.8vw,54px); font-weight:400; line-height:1.04; margin-bottom:22px; }
+  .story h2 em{ font-style:italic; color:var(--rose); }
+  .story p{ color:var(--ink-soft); margin-bottom:18px; max-width:48ch; }
+
+  /* values */
+  .sec-head{ text-align:center; max-width:56ch; margin:0 auto 60px; }
+  .sec-head .kicker{ justify-content:center; }
+  .sec-head h2{ font-family:var(--serif); font-size:clamp(32px,4.4vw,60px); font-weight:400; margin-top:18px; }
+  .sec-head h2 em{ font-style:italic; color:var(--rose); }
+  .values{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); }
+  .value{ background:var(--paper); padding:44px 36px; }
+  section.white .value{ background:var(--white); }
+  .value .ic{ font-family:var(--serif); font-size:34px; color:var(--rose); }
+  .value h4{ font-family:var(--serif); font-size:26px; font-weight:400; margin:18px 0 12px; }
+  .value p{ font-size:14px; color:var(--ink-soft); line-height:1.6; }
+
+  /* timeline */
+  .timeline{ max-width:760px; margin:0 auto; }
+  .tl{ display:grid; grid-template-columns:120px 1fr; gap:30px; padding:28px 0; border-bottom:1px solid var(--line); }
+  .tl .yr{ font-family:var(--serif); font-size:28px; color:var(--rose); }
+  .tl h4{ font-family:var(--serif); font-size:22px; font-weight:400; margin-bottom:6px; }
+  .tl p{ font-size:14px; color:var(--ink-soft); max-width:52ch; }
+
+  /* stats band */
+  .statband{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+  .statband div{ background:var(--paper); padding:50px 30px; text-align:center; }
+  .statband .n{ font-family:var(--serif); font-size:clamp(38px,4.4vw,60px); color:var(--rose); line-height:1; }
+  .statband .t{ font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--mist); margin-top:12px; }
+
+  /* press */
+  .press{ display:flex; flex-wrap:wrap; justify-content:center; gap:18px 56px; align-items:center; }
+  .press span{ font-family:var(--serif); font-size:24px; color:var(--ink-soft); opacity:.7; font-style:italic; }
+
+  .ctaband{ position:relative; overflow:hidden; padding:120px 0; text-align:center; color:var(--cream); }
+  .ctaband .inner{ position:relative; z-index:3; }
+  .ctaband h2{ font-family:var(--serif); font-size:clamp(40px,6vw,92px); font-weight:400; line-height:.98; }
+  .ctaband h2 em{ font-style:italic; color:var(--rose-soft); }
+  .ctaband p{ color:rgba(244,239,231,.85); margin:22px auto 34px; max-width:46ch; }
+
+  .rv{ opacity:0; transform:translateY(30px); transition:opacity 1s var(--ease), transform 1s var(--ease); }
+  .rv.in{ opacity:1; transform:none; }
+  .rv.d1{ transition-delay:.08s; } .rv.d2{ transition-delay:.16s; } .rv.d3{ transition-delay:.24s; }
+
+  @media (max-width:860px){
+    .story{ grid-template-columns:1fr; gap:40px; }
+    .values{ grid-template-columns:1fr; }
+    .statband{ grid-template-columns:1fr 1fr; }
+    .tl{ grid-template-columns:70px 1fr; gap:18px; }
+  }
+</style>
+</head>
+<body>
+<script>try{if(localStorage.getItem('velvet-theme')==='dark')document.body.classList.add('theme-dark');}catch(e){}</script>
+<div class="grain"></div>
+
+<nav class="nav on-hero" id="nav">
+  <a href="Home.html" class="mark">VELVET</a>
+  <div class="links">
+    <a href="Home.html">The Society</a>
+    <a href="Events.html">Events</a>
+    <a href="Membership.html">Membership</a>
+    <a href="About.html" class="active">About</a>
+  </div>
+  <div class="nav-cta">
+    <a href="Join.html" class="btn btn-rose">Request invitation <span class="ar">→</span></a>
+    <button class="menu-btn" aria-label="Menu">☰</button>
+  </div>
+</nav>
+
+<header class="phero" data-screen-label="About / Hero">
+  <div class="cinema plum"><img class="cphoto" src="https://images.unsplash.com/photo-1496440737103-cd596325d314?w=1700&q=80" alt="" /><div class="tint"></div><div class="mesh"></div><div class="vignette"></div></div>
+  <div class="inner shell">
+    <span class="kicker on-dark">Our story</span>
+    <h1>We built the room <em>we</em> wanted.</h1>
+    <p>VELVET started as a question between friends: where do you go to meet someone real, when every app feels the same?</p>
+  </div>
+</header>
+
+<!-- MANIFESTO -->
+<section class="blk" data-screen-label="About / Manifesto">
+  <div class="shell">
+    <div class="manifesto rv">
+      <span class="kicker">The idea</span>
+      <p>We believe connection deserves <em>better than a feed.</em> So we made a society where women are celebrated, men show up with intention, and every introduction is earned — never algorithm-ed.</p>
+      <div class="sig">— The founders of VELVET</div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="blk white" data-screen-label="About / Story">
+  <div class="shell">
+    <div class="story">
+      <div class="pic rv"><img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=1000&q=80" alt="" /><span class="chip">Camille L. · Founder</span></div>
+      <div class="copy rv d1">
+        <span class="kicker">From a dinner to a movement</span>
+        <h2 style="margin-top:18px">It began with <em>twelve chairs</em> and a rule: be real.</h2>
+        <p>In 2015, a private supper in London brought together a dozen people tired of small talk and swiping. One rule held the night together — leave the performance at the door.</p>
+        <p>Word spread quietly, the way the best things do. A dinner became a salon, a salon became a society, and the society became an app — so the feeling could travel without losing its discretion.</p>
+        <p>Today VELVET hosts nights across four continents, but the rule hasn't changed. Be real, be respectful, and let the evening surprise you.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="blk" data-screen-label="About / Values">
+  <div class="shell">
+    <div class="sec-head rv"><span class="kicker">What we stand for</span><h2>Three things we <em>never</em> compromise</h2></div>
+    <div class="values">
+      <div class="value rv"><div class="ic">✦</div><h4>Women, centred</h4><p>The experience is designed around women's comfort, safety and agency. They set the pace; everyone else rises to it.</p></div>
+      <div class="value rv d1"><div class="ic">✦</div><h4>Discretion, always</h4><p>Verified identities, private profiles, no phones at the table. What happens inside the room belongs to the room.</p></div>
+      <div class="value rv d2"><div class="ic">✦</div><h4>Intention over volume</h4><p>We curate for genuine interest, not endless options. Fewer, better introductions — the kind worth your evening.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section style="position:relative;z-index:2;background:var(--white)">
+  <div class="statband">
+    <div class="rv"><div class="n">2015</div><div class="t">Founded · London</div></div>
+    <div class="rv d1"><div class="n">12k</div><div class="t">Verified women</div></div>
+    <div class="rv d2"><div class="n">40+</div><div class="t">Cities worldwide</div></div>
+    <div class="rv d3"><div class="n">800+</div><div class="t">Nights hosted</div></div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="blk" data-screen-label="About / Timeline">
+  <div class="shell">
+    <div class="sec-head rv"><span class="kicker">The road here</span><h2>A quiet <em>rise</em></h2></div>
+    <div class="timeline">
+      <div class="tl rv"><div class="yr">'15</div><div><h4>The first table</h4><p>Twelve friends, one supper, one rule. The idea of VELVET is born in a Marylebone flat.</p></div></div>
+      <div class="tl rv"><div class="yr">'17</div><div><h4>The Salon</h4><p>Monthly nights begin selling out by word of mouth across London.</p></div></div>
+      <div class="tl rv"><div class="yr">'19</div><div><h4>Across the channel</h4><p>Paris and New York chapters open. Membership crosses 2,000 verified women.</p></div></div>
+      <div class="tl rv"><div class="yr">'22</div><div><h4>The app</h4><p>VELVET launches in your pocket — the society's discretion, everywhere you are.</p></div></div>
+      <div class="tl rv"><div class="yr">'26</div><div><h4>Four continents</h4><p>Forty cities, eight hundred nights, and the same rule that started it all.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRESS -->
+<section class="blk white" data-screen-label="About / Press">
+  <div class="shell">
+    <div class="sec-head rv"><span class="kicker">In good company</span><h2>Talked about, <em>quietly</em></h2></div>
+    <div class="press rv">
+      <span>The Modern Review</span><span>VOGUE-ish</span><span>Tatler &amp; Co.</span><span>Soirée</span><span>The Establishment</span>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="ctaband" data-screen-label="About / CTA">
+  <div class="cinema plum"><img class="cphoto" src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=1700&q=80" alt="" /><div class="tint"></div><div class="mesh"></div><div class="vignette"></div></div>
+  <div class="inner shell">
+    <span class="kicker on-dark center">Join the story</span>
+    <h2 style="margin-top:22px">Your chapter <em>starts</em> here.</h2>
+    <p>Request an invitation and find out what a room built on intention feels like.</p>
+    <a href="Join.html" class="btn btn-rose">Request invitation <span class="ar">→</span></a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="shell">
+    <div class="top">
+      <div>
+        <div class="mark">VEL<em>VET</em></div>
+        <p class="tag">A private members' club — and connection app — where men meet remarkable women. Discreet by design, worldwide by nature.</p>
+      </div>
+      <div><h5>Discover</h5><ul><li><a href="Home.html">The Society</a></li><li><a href="Events.html">Events</a></li><li><a href="Membership.html">Membership</a></li><li><a href="About.html">About</a></li></ul></div>
+      <div><h5>Members</h5><ul><li><a href="Join.html">Request invitation</a></li><li><a href="#">Sign in</a></li><li><a href="#">The app</a></li><li><a href="#">House rules</a></li></ul></div>
+      <div><h5>Stay close</h5><ul><li><a href="#">Instagram</a></li><li><a href="#">The Journal</a></li><li><a href="#">Contact</a></li><li><a href="#">Press</a></li></ul></div>
+    </div>
+    <div class="bottom">
+      <span>© 2026 VELVET. A working concept. No third-party marks used.</span>
+      <div class="social"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Discretion</a></div>
+    </div>
+  </div>
+</footer>
+
+<button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode"><span class="dot"></span><span class="tlabel">Dark</span></button>
+
+<script>
+  const nav=document.getElementById('nav');
+  const hero=document.querySelector('.phero');
+  addEventListener('scroll',()=>{
+    nav.classList.toggle('scrolled', scrollY>40);
+    nav.classList.toggle('on-hero', scrollY < (hero.offsetHeight - 90));
+  });
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12});
+  document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+  const tt=document.getElementById('themeToggle'); const tl=tt.querySelector('.tlabel');
+  function syncLabel(){ tl.textContent = document.body.classList.contains('theme-dark') ? 'Light' : 'Dark'; }
+  syncLabel();
+  tt.addEventListener('click', ()=>{
+    document.body.classList.toggle('theme-dark');
+    try{ localStorage.setItem('velvet-theme', document.body.classList.contains('theme-dark')?'dark':'light'); }catch(e){}
+    syncLabel();
+  });
+</script>
+</body>
+</html>

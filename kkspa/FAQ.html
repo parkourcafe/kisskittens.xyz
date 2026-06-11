@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>VELOUR — FAQ</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='11' fill='%230a0a0a'/%3E%3Cg transform='translate(0,3.5)'%3E%3Cpath d='M6 15 C9 10 13 9 16 11 C17.5 12 18.6 13.2 20 14.6 C21.4 13.2 22.5 12 24 11 C27 9 31 10 34 15 C30 13.4 26 13.6 22 14.8 C21 15 19 15 18 14.8 C14 13.6 10 13.4 6 15 Z' fill='%23f4f1ea'/%3E%3Cpath d='M6 15 C11 16.4 15 16.6 20 16.6 C25 16.6 29 16.4 34 15 C32 23 27 28 20 28.5 C13 28 8 23 6 15 Z' fill='%23ED0080'/%3E%3C/g%3E%3C/svg%3E" />
+<link rel="stylesheet" href="velour.css" />
+<style>
+  .phero{ position:relative; min-height:50svh; display:flex; align-items:flex-end; overflow:hidden; }
+  .phero .bg{ position:absolute; inset:0; z-index:0; }
+  .phero .bg img{ width:100%; height:100%; object-fit:cover; filter:grayscale(.3) contrast(1.02) brightness(.55) sepia(.14); }
+  .phero .bg::after{ content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(12,10,9,.4),transparent 40%,rgba(12,10,9,.8) 85%,var(--ink)); }
+  .phero .inner{ position:relative; z-index:2; padding-bottom:7vh; width:100%; }
+  .phero h1{ font-family:var(--serif); font-weight:400; font-size:clamp(48px,8vw,128px); line-height:.94; }
+  .phero h1 em{ font-style:italic; color:var(--rose); }
+
+  section.blk{ position:relative; z-index:2; padding:110px 0; background:var(--ink); }
+  .faqwrap{ display:grid; grid-template-columns:.8fr 1.2fr; gap:60px; align-items:start; }
+  .faqwrap .side h2{ font-family:var(--serif); font-weight:400; font-size:clamp(28px,3.4vw,44px); line-height:1.04; }
+  .faqwrap .side h2 em{ font-style:italic; color:var(--rose); }
+  .faqwrap .side p{ color:var(--muted); margin-top:18px; max-width:34ch; }
+  .faqwrap .side .btn{ margin-top:28px; }
+
+  .faqcat{ margin-bottom:14px; }
+  .faqcat .ct{ font-family:var(--disp); font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--rose); margin:30px 0 6px; }
+  .qa{ border-bottom:1px solid var(--line); }
+  .qa button{ width:100%; background:none; border:none; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:20px; padding:24px 2px; text-align:left; font-family:var(--serif); font-size:clamp(19px,2vw,25px); color:var(--ivory); }
+  .qa .sign{ flex:none; width:30px; height:30px; border:1px solid var(--line); display:grid; place-items:center; color:var(--rose); font-size:18px; transition:.4s var(--ease); }
+  .qa.open .sign{ transform:rotate(45deg); background:var(--rose); color:var(--ink); border-color:var(--rose); }
+  .qa .ans{ max-height:0; overflow:hidden; transition:max-height .5s var(--ease); }
+  .qa .ans p{ color:var(--ivory-dim); padding:0 2px 26px; max-width:66ch; font-size:15px; line-height:1.7; }
+
+  @media (max-width:920px){ .faqwrap{ grid-template-columns:1fr; gap:34px; } }
+</style>
+</head>
+<body>
+<nav class="nav" id="nav">
+  <a href="The House.html" class="mark"><svg class="sym" viewBox="0 0 40 40" aria-hidden="true"><g transform="translate(0,3)"><path d="M6 15 C9 10 13 9 16 11 C17.5 12 18.6 13.2 20 14.6 C21.4 13.2 22.5 12 24 11 C27 9 31 10 34 15 C30 13.4 26 13.6 22 14.8 C21 15 19 15 18 14.8 C14 13.6 10 13.4 6 15 Z" fill="#f4f1ea"/><path d="M6 15 C11 16.4 15 16.6 20 16.6 C25 16.6 29 16.4 34 15 C32 23 27 28 20 28.5 C13 28 8 23 6 15 Z" fill="#ED0080"/></g></svg><span class="wm">Velour</span></a>
+  <div class="links"><a href="Rituals.html">Rituals</a><a href="Therapists.html">Therapists</a><a href="Journal.html">Journal</a><a href="The House.html#house">The House</a><a href="Contact.html">Contact</a></div>
+  <div class="nav-cta"><a href="Booking.html" class="btn btn-rose">Book a Ritual</a><button class="menu-btn" id="menuBtn" aria-label="Menu">☰</button></div>
+</nav>
+<div class="drawer" id="drawer">
+  <div class="dtop"><span class="wm">Velour</span><button id="closeBtn" style="background:none;border:none;color:#f0e7dc;font-size:25px;cursor:pointer">✕</button></div>
+  <div class="dlinks"><a href="Rituals.html">Rituals</a><a href="Therapists.html">Therapists</a><a href="Journal.html">Journal</a><a href="The House.html#house">The House</a><a href="FAQ.html">FAQ</a><a href="Contact.html">Contact</a></div>
+  <div class="dcta"><a href="Booking.html" class="btn btn-rose">Book a Ritual</a></div>
+</div>
+
+<header class="phero" data-screen-label="FAQ / Hero">
+  <div class="bg"><img src="https://images.unsplash.com/photo-1556760544-74068565f05c?w=1900&q=80" alt="" /></div>
+  <div class="inner shell">
+    <span class="eyebrow">Good to know</span>
+    <h1>Before you <em>arrive.</em></h1>
+  </div>
+</header>
+
+<section class="blk" data-screen-label="FAQ / List">
+  <div class="shell">
+    <div class="faqwrap">
+      <div class="side">
+        <h2>Everything you might <em>wonder.</em></h2>
+        <p>Still unsure about something? We're happy to talk it through before you book.</p>
+        <a href="Contact.html" class="btn btn-ghost">Ask us anything <span class="ar">→</span></a>
+      </div>
+      <div class="faqlist">
+        <div class="faqcat"><div class="ct">Booking</div></div>
+        <div class="qa"><button>Do I need to book in advance?<span class="sign">+</span></button><div class="ans"><p>Yes — the House sees one guest at a time, so every ritual is by appointment. We recommend booking a few days ahead, though we'll always try to find room for last-minute rest.</p></div></div>
+        <div class="qa"><button>Can I choose my therapist?<span class="sign">+</span></button><div class="ans"><p>Absolutely. Browse the therapists, read their specialisms, and select yours when you book. Not sure? Choose "no preference" and we'll pair you with the right hands for your ritual.</p></div></div>
+        <div class="qa"><button>What's your cancellation policy?<span class="sign">+</span></button><div class="ans"><p>Life happens. Reschedule or cancel free of charge up to 24 hours before. Within 24 hours, we ask for 50% of the ritual to honour your therapist's reserved time.</p></div></div>
+
+        <div class="faqcat"><div class="ct">Your Visit</div></div>
+        <div class="qa"><button>What should I wear?<span class="sign">+</span></button><div class="ans"><p>Come as you are. You'll undress to your comfort in a private suite and be draped throughout — only the area being worked on is ever uncovered. Your comfort sets the pace.</p></div></div>
+        <div class="qa"><button>How early should I arrive?<span class="sign">+</span></button><div class="ans"><p>Ten minutes early is perfect. It gives you time for tea, a quiet word with your therapist about pressure and preferences, and a soft landing before your hour begins.</p></div></div>
+        <div class="qa"><button>Are the oils suitable for sensitive skin?<span class="sign">+</span></button><div class="ans"><p>All our oils are cold-pressed and hand-blended in-house, free of synthetics. Tell us about allergies when you book and we'll prepare an unscented or hypoallergenic blend.</p></div></div>
+
+        <div class="faqcat"><div class="ct">Rituals &amp; Gifts</div></div>
+        <div class="qa"><button>Which ritual is right for me?<span class="sign">+</span></button><div class="ans"><p>If you're new, Le Velours is the perfect introduction. For deep tension, choose Profond; for pure warmth, Pierres Chaudes. Unsure? Tell us how you feel and we'll guide you.</p></div></div>
+        <div class="qa"><button>Do you offer couples sessions?<span class="sign">+</span></button><div class="ans"><p>Yes — our Duo ritual seats two guests side by side with two therapists. A beautiful thing to share. Book it like any other ritual, or enquire about private buy-outs of the House.</p></div></div>
+        <div class="qa"><button>Can I buy a gift card?<span class="sign">+</span></button><div class="ans"><p>Of course. Gift a specific ritual or an open amount, delivered as a printed card or by email. Visit our <a href="Gift.html" style="color:var(--rose);border-bottom:1px solid var(--rose)">gift page</a> to choose.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="shell">
+    <div class="top">
+      <div><div class="wm">Velour</div><p class="tag">A private house of restorative touch. Bespoke massage and ritual, by appointment — in quiet luxury.</p><div class="social"><a href="#">IG</a><a href="#">FB</a><a href="#">in</a></div></div>
+      <div><h5>Explore</h5><ul><li><a href="Rituals.html">Rituals</a></li><li><a href="Therapists.html">Therapists</a></li><li><a href="Journal.html">Journal</a></li><li><a href="The House.html#house">The House</a></li><li><a href="FAQ.html">FAQ</a></li></ul></div>
+      <div><h5>Visit</h5><ul><li><a href="Booking.html">Book a Ritual</a></li><li><a href="Gift.html">Gift Cards</a></li><li><a href="Contact.html">Contact</a></li><li><a href="Contact.html">Find Us</a></li></ul></div>
+      <div class="news"><h5>The House Letter</h5><p>Seasonal rituals and quiet invitations, now and then.</p><form onsubmit="return false"><input type="email" placeholder="Your email" /><button>Join</button></form></div>
+    </div>
+    <div class="bottom"><span>© 2026 Velour — House of Touch. By appointment only.</span><div class="lr"><a href="#">Privacy</a><a href="#">Terms</a><a href="FAQ.html">FAQ</a></div></div>
+  </div>
+</footer>
+
+<script>
+  const nav=document.getElementById('nav');
+  addEventListener('scroll',()=>nav.classList.toggle('scrolled', scrollY>40));
+  const drawer=document.getElementById('drawer');
+  document.getElementById('menuBtn').addEventListener('click',()=>drawer.classList.add('open'));
+  document.getElementById('closeBtn').addEventListener('click',()=>drawer.classList.remove('open'));
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>drawer.classList.remove('open')));
+  document.querySelectorAll('.qa button').forEach(b=>b.addEventListener('click',()=>{
+    const qa=b.parentElement; const ans=qa.querySelector('.ans'); const open=qa.classList.contains('open');
+    document.querySelectorAll('.qa').forEach(x=>{ x.classList.remove('open'); x.querySelector('.ans').style.maxHeight=null; });
+    if(!open){ qa.classList.add('open'); ans.style.maxHeight=ans.scrollHeight+'px'; }
+  }));
+</script>
+</body>
+</html>

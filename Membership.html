@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>KISS KITTENS — Membership</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2040%2040%22%3E%3Crect%20width%3D%2240%22%20height%3D%2240%22%20rx%3D%2211%22%20fill%3D%22%230a0a0a%22%2F%3E%3Cg%20transform%3D%22translate(0%2C3.5)%22%3E%3Cpath%20d%3D%22M6%2015%20C9%2010%2013%209%2016%2011%20C17.5%2012%2018.6%2013.2%2020%2014.6%20C21.4%2013.2%2022.5%2012%2024%2011%20C27%209%2031%2010%2034%2015%20C30%2013.4%2026%2013.6%2022%2014.8%20C21%2015%2019%2015%2018%2014.8%20C14%2013.6%2010%2013.4%206%2015%20Z%22%20fill%3D%22%23f4f1ea%22%2F%3E%3Cpath%20d%3D%22M6%2015%20C11%2016.4%2015%2016.6%2020%2016.6%20C25%2016.6%2029%2016.4%2034%2015%20C32%2023%2027%2028%2020%2028.5%20C13%2028%208%2023%206%2015%20Z%22%20fill%3D%22%23ED0080%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E" />
+<link rel="stylesheet" href="kk.css" />
+<style>
+  .phero{ position:relative; min-height:64svh; display:flex; align-items:flex-end; overflow:hidden; }
+  .phero .bg{ position:absolute; inset:0; z-index:0; }
+  .phero .bg img{ width:100%; height:100%; object-fit:cover; filter:grayscale(.55) contrast(1.08) brightness(.55); }
+  .phero .bg::after{ content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(0,0,0,.35),transparent 45%,rgba(0,0,0,.78) 85%,var(--bg)); }
+  .phero .inner{ position:relative; z-index:2; padding-bottom:7vh; width:100%; }
+  .phero h1{ font-family:var(--disp); font-weight:900; font-size:clamp(50px,10vw,140px); text-transform:uppercase; line-height:.86; letter-spacing:-.03em; }
+  .phero h1 em{ font-style:normal; color:var(--pink); }
+  .phero .lede{ margin-top:24px; }
+
+  section.blk{ position:relative; z-index:2; padding:120px 0; background:var(--bg); }
+  section.blk.surface{ background:var(--bg-2); }
+  .head{ text-align:center; max-width:58ch; margin:0 auto 58px; }
+  .head h2{ font-family:var(--disp); font-weight:800; font-size:clamp(32px,5vw,68px); text-transform:uppercase; line-height:.95; letter-spacing:-.02em; }
+  .head p{ color:var(--grey-2); margin-top:16px; }
+
+  .mgrid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; align-items:stretch; }
+  .mcard{ border:1px solid var(--line); padding:46px 40px; background:var(--bg); display:flex; flex-direction:column; transition:border-color .4s var(--ease), transform .4s var(--ease); position:relative; }
+  .mcard:hover{ transform:translateY(-6px); border-color:rgba(255,255,255,.25); }
+  .mcard.feature{ background:var(--surface); border-color:var(--pink); }
+  .mcard .tag{ position:absolute; top:-11px; left:40px; background:var(--pink); color:#fff; font-size:10px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; padding:6px 14px; }
+  .mcard h3{ font-family:var(--disp); font-weight:800; font-size:32px; text-transform:uppercase; }
+  .mcard .desc{ color:var(--grey-2); font-size:14px; margin-top:8px; min-height:44px; }
+  .mcard .price{ font-family:var(--disp); font-weight:800; font-size:60px; margin:22px 0 2px; line-height:1; }
+  .mcard .price small{ font-family:var(--sans); font-size:14px; font-weight:500; color:var(--grey-2); }
+  .mcard ul{ list-style:none; margin:28px 0 34px; display:flex; flex-direction:column; gap:14px; }
+  .mcard ul li{ font-size:14px; color:var(--grey); padding-left:26px; position:relative; line-height:1.5; }
+  .mcard ul li::before{ content:"✦"; position:absolute; left:0; top:1px; color:var(--pink); font-size:11px; }
+  .mcard .btn{ width:100%; justify-content:center; margin-top:auto; }
+
+  /* compare */
+  .ctable{ width:100%; border-collapse:collapse; }
+  .ctable th,.ctable td{ padding:20px 18px; border-bottom:1px solid var(--line); font-size:14px; text-align:center; }
+  .ctable thead th{ font-family:var(--disp); font-weight:800; font-size:22px; text-transform:uppercase; }
+  .ctable thead th:first-child{ text-align:left; font-family:var(--sans); font-size:11px; font-weight:600; letter-spacing:.2em; color:var(--grey-3); }
+  .ctable td:first-child{ text-align:left; color:var(--white); }
+  .ctable td{ color:var(--grey-2); }
+  .ctable .y{ color:var(--pink); font-size:15px; }
+  .ctable .colF{ background:rgba(237,0,128,.06); }
+
+  /* benefits */
+  .bgrid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); }
+  .bgrid .c{ background:var(--bg); padding:42px 34px; }
+  .bgrid .c .ic{ font-family:var(--disp); font-weight:800; font-size:24px; color:var(--pink); }
+  .bgrid .c h4{ font-family:var(--disp); font-weight:700; font-size:22px; text-transform:uppercase; margin:16px 0 10px; }
+  .bgrid .c p{ font-size:14px; color:var(--grey-2); }
+
+  /* faq */
+  .faq{ max-width:820px; margin:0 auto; }
+  .qa{ border-bottom:1px solid var(--line); }
+  .qa button{ width:100%; background:none; border:none; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:20px; padding:26px 2px; text-align:left; font-family:var(--disp); font-weight:700; font-size:clamp(18px,2vw,24px); text-transform:uppercase; color:var(--white); }
+  .qa .sign{ flex:none; width:30px; height:30px; border:1px solid var(--line); display:grid; place-items:center; color:var(--pink); font-size:18px; transition:.4s var(--ease); }
+  .qa.open .sign{ transform:rotate(45deg); background:var(--pink); color:#fff; border-color:var(--pink); }
+  .qa .ans{ max-height:0; overflow:hidden; transition:max-height .5s var(--ease); }
+  .qa .ans p{ color:var(--grey-2); padding:0 2px 26px; max-width:66ch; font-size:15px; }
+
+  .joincta{ position:relative; overflow:hidden; padding:140px 0; text-align:center; }
+  .joincta .bg{ position:absolute; inset:0; z-index:0; }
+  .joincta .bg img{ width:100%; height:100%; object-fit:cover; filter:grayscale(.7) contrast(1.1) brightness(.4); }
+  .joincta .inner{ position:relative; z-index:2; }
+  .joincta h2{ font-family:var(--disp); font-weight:900; font-size:clamp(40px,7vw,104px); text-transform:uppercase; line-height:.9; letter-spacing:-.02em; }
+  .joincta h2 em{ font-style:normal; color:var(--pink); }
+  .joincta p{ color:var(--grey); margin:24px auto 36px; max-width:44ch; }
+
+  @media (max-width:860px){ .mgrid,.bgrid{ grid-template-columns:1fr; } .ctable{ font-size:12px; } .ctable th,.ctable td{ padding:13px 8px; } }
+</style>
+</head>
+<body>
+<nav class="nav" id="nav">
+  <a href="Home.html" class="mark"><span class="kk"><svg viewBox="0 0 40 40" aria-hidden="true"><g transform="translate(0,1.5)"><path d="M6 15 C9 10 13 9 16 11 C17.5 12 18.6 13.2 20 14.6 C21.4 13.2 22.5 12 24 11 C27 9 31 10 34 15 C30 13.4 26 13.6 22 14.8 C21 15 19 15 18 14.8 C14 13.6 10 13.4 6 15 Z" fill="#f4f1ea"/><path d="M6 15 C11 16.4 15 16.6 20 16.6 C25 16.6 29 16.4 34 15 C32 23 27 28 20 28.5 C13 28 8 23 6 15 Z" fill="#ED0080"/></g></svg></span><span style="color:#ED0080">KISS</span> KITTENS</a>
+  <div class="links"><a href="Parties.html">Parties</a><a href="Membership.html" class="active">Membership</a><a href="Network.html">The Network</a><a href="Magazine.html">Magazine</a><a href="About.html">About</a></div>
+  <div class="nav-cta"><a href="Membership.html" class="btn btn-pink">Become a Member</a><button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button></div>
+</nav>
+<div class="drawer" id="drawer">
+  <div class="dtop"><span class="mark" style="font-family:var(--disp);font-weight:900;font-size:18px;display:flex;gap:9px;align-items:center"><span class="kk-d"><svg viewBox="0 0 40 40" aria-hidden="true"><g transform="translate(0,1.5)"><path d="M6 15 C9 10 13 9 16 11 C17.5 12 18.6 13.2 20 14.6 C21.4 13.2 22.5 12 24 11 C27 9 31 10 34 15 C30 13.4 26 13.6 22 14.8 C21 15 19 15 18 14.8 C14 13.6 10 13.4 6 15 Z" fill="#f4f1ea"/><path d="M6 15 C11 16.4 15 16.6 20 16.6 C25 16.6 29 16.4 34 15 C32 23 27 28 20 28.5 C13 28 8 23 6 15 Z" fill="#ED0080"/></g></svg></span><span style="color:#ED0080">KISS</span> KITTENS</span><button id="closeBtn" style="display:block;background:none;border:none;color:#fff;font-size:26px;cursor:pointer">✕</button></div>
+  <div class="dlinks"><a href="Parties.html">Parties</a><a href="Membership.html">Membership</a><a href="Network.html">The Network</a><a href="Magazine.html">Magazine</a><a href="About.html">About</a></div>
+  <div class="dcta"><a href="Membership.html" class="btn btn-pink">Become a Member</a></div>
+</div>
+
+<header class="phero" data-screen-label="Membership / Hero">
+  <div class="bg"><img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=1900&q=80" alt="" /></div>
+  <div class="inner shell">
+    <span class="eyebrow">Approval-based · Women come first</span>
+    <h1>Become a <em>Kitten.</em></h1>
+    <p class="lede">Membership is curated, not bought. We approve every member by hand to keep the community bold, safe and brilliant. No contracts — cancel any time.</p>
+  </div>
+</header>
+
+<section class="blk" data-screen-label="Membership / Tiers">
+  <div class="shell">
+    <div class="head"><h2>Three ways in</h2><p>Start free and rise when you're ready. Every tier is built on the same promise: verified people, real intent, total discretion.</p></div>
+    <div class="mgrid">
+      <div class="mcard rv">
+        <h3>Free</h3><div class="desc">Join the network &amp; explore.</div>
+        <div class="price">£0<small> /forever</small></div>
+        <ul><li>The KK Connect app</li><li>A verified profile</li><li>Community feed &amp; groups</li><li>Public mixers</li><li>Browse who's near you</li></ul>
+        <a href="#apply" class="btn btn-ghost">Apply Free</a>
+      </div>
+      <div class="mcard feature rv d1">
+        <span class="tag">Most Popular</span>
+        <h3>Kitten</h3><div class="desc">The full experience.</div>
+        <div class="price">£25<small> /month</small></div>
+        <ul><li>Everything in Free</li><li>Priority party tickets</li><li>Bring an approved guest</li><li>Private member events</li><li>Unlimited connections</li></ul>
+        <a href="#apply" class="btn btn-pink">Apply Now</a>
+      </div>
+      <div class="mcard rv d2">
+        <h3>Icon</h3><div class="desc">Inner circle, by invitation.</div>
+        <div class="price">VIP<small> /bespoke</small></div>
+        <ul><li>Everything in Kitten</li><li>Guaranteed party access</li><li>Global concierge</li><li>Host your own night</li><li>First access, everywhere</li></ul>
+        <a href="#apply" class="btn btn-ghost">Enquire</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="blk surface" data-screen-label="Membership / Compare">
+  <div class="shell">
+    <div class="head"><h2>Compare</h2></div>
+    <table class="ctable">
+      <thead><tr><th>What's included</th><th>Free</th><th class="colF">Kitten</th><th>Icon</th></tr></thead>
+      <tbody>
+        <tr><td>KK Connect app &amp; profile</td><td class="y">✦</td><td class="colF y">✦</td><td class="y">✦</td></tr>
+        <tr><td>Browse &amp; connect</td><td>Limited</td><td class="colF">Unlimited</td><td>Unlimited</td></tr>
+        <tr><td>Public mixers</td><td class="y">✦</td><td class="colF y">✦</td><td class="y">✦</td></tr>
+        <tr><td>Priority party tickets</td><td>—</td><td class="colF y">✦</td><td class="y">✦</td></tr>
+        <tr><td>Bring an approved guest</td><td>—</td><td class="colF y">✦</td><td>+3 guests</td></tr>
+        <tr><td>Guaranteed party access</td><td>—</td><td class="colF">—</td><td class="y">✦</td></tr>
+        <tr><td>Personal concierge</td><td>—</td><td class="colF">—</td><td class="y">✦</td></tr>
+        <tr><td>Host your own night</td><td>—</td><td class="colF">—</td><td class="y">✦</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="blk" data-screen-label="Membership / Why">
+  <div class="shell">
+    <div class="head"><h2>Why it's different</h2><p>Discretion only works when trust is real. Here's what every membership is built on.</p></div>
+    <div class="bgrid">
+      <div class="c"><div class="ic">✦</div><h4>Women First</h4><p>The whole experience is designed around women's comfort, safety and agency. They set the pace.</p></div>
+      <div class="c"><div class="ic">✦</div><h4>Verified, Always</h4><p>Every member is approved by hand. Real people, real intent — never bots, never noise.</p></div>
+      <div class="c"><div class="ic">✦</div><h4>Total Discretion</h4><p>Private profiles, no phones at the party, encrypted verification. What happens here stays here.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="blk surface" id="apply" data-screen-label="Membership / FAQ">
+  <div class="shell">
+    <div class="head"><h2>Questions</h2></div>
+    <div class="faq">
+      <div class="qa"><button>Is membership really approval-based?<span class="sign">+</span></button><div class="ans"><p>Yes. Anyone can apply, and the Free tier is open — but access to parties and the wider network is granted after a personal review. It keeps the community safe and the company worth keeping.</p></div></div>
+      <div class="qa"><button>How is my privacy protected?<span class="sign">+</span></button><div class="ans"><p>Your profile is private by default and only visible to verified members you allow. Identity documents are encrypted, never shared, and deleted after verification. What happens at a party stays there.</p></div></div>
+      <div class="qa"><button>Can I cancel any time?<span class="sign">+</span></button><div class="ans"><p>Always. Membership is month to month with no contract. Pause or cancel from the app in two taps — you keep access until the end of your billing period.</p></div></div>
+      <div class="qa"><button>Who is Kiss Kittens for?<span class="sign">+</span></button><div class="ans"><p>Bold, modern women — and the couples they invite. We're sex-positive, consent-first, and unapologetically women-led. If that's you, you'll feel at home.</p></div></div>
+      <div class="qa"><button>What does a party cost?<span class="sign">+</span></button><div class="ans"><p>Membership covers access; individual nights are priced per event, typically £140–£210 including welcome drinks. Icon members receive priority and complimentary places at select parties.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="joincta" data-screen-label="Membership / CTA">
+  <div class="bg"><img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=1900&q=80" alt="" /></div>
+  <div class="inner shell">
+    <h2>Ready when <em>you</em> are.</h2>
+    <p>Start free, or apply for the full experience. Either way, it begins with hello.</p>
+    <a href="#apply" class="btn btn-pink" style="font-size:14px;padding:20px 42px">Apply Now <span class="ar">→</span></a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="shell">
+    <div class="top">
+      <div><div class="mark"><span class="kk-f"><svg viewBox="0 0 40 40" aria-hidden="true"><g transform="translate(0,1.5)"><path d="M6 15 C9 10 13 9 16 11 C17.5 12 18.6 13.2 20 14.6 C21.4 13.2 22.5 12 24 11 C27 9 31 10 34 15 C30 13.4 26 13.6 22 14.8 C21 15 19 15 18 14.8 C14 13.6 10 13.4 6 15 Z" fill="#f4f1ea"/><path d="M6 15 C11 16.4 15 16.6 20 16.6 C25 16.6 29 16.4 34 15 C32 23 27 28 20 28.5 C13 28 8 23 6 15 Z" fill="#ED0080"/></g></svg></span><span style="color:#ED0080">KISS</span> KITTENS</div><p class="tag">The world's most exclusive parties and members' network — created by women, for women. Since 2005.</p><div class="social"><a href="#">IG</a><a href="#">X</a><a href="#">TT</a><a href="#">IN</a></div></div>
+      <div><h5>Explore</h5><ul><li><a href="Parties.html">Parties</a></li><li><a href="Membership.html">Membership</a></li><li><a href="Network.html">The Network</a></li><li><a href="Magazine.html">Magazine</a></li><li><a href="About.html">About</a></li></ul></div>
+      <div><h5>Members</h5><ul><li><a href="Membership.html">Apply Now</a></li><li><a href="#">Sign In</a></li><li><a href="Network.html">The App</a></li><li><a href="About.html">FAQ</a></li><li><a href="#">Contact</a></li></ul></div>
+      <div class="news"><h5>Get on the list</h5><p>Party drops, member stories and the occasional secret.</p><form onsubmit="return false"><input type="email" placeholder="Your email" /><button>Join</button></form></div>
+    </div>
+    <div class="bottom"><span>© 2026 Kiss Kittens — visual concept recreation. No affiliation; original wordmark &amp; placeholder imagery.</span><div class="lr"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Cookies</a></div></div>
+  </div>
+</footer>
+
+<script>
+  const nav=document.getElementById('nav');
+  addEventListener('scroll',()=>nav.classList.toggle('scrolled', scrollY>40));
+  const drawer=document.getElementById('drawer');
+  document.getElementById('menuBtn').addEventListener('click',()=>drawer.classList.add('open'));
+  document.getElementById('closeBtn').addEventListener('click',()=>drawer.classList.remove('open'));
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>drawer.classList.remove('open')));
+  document.querySelectorAll('.qa button').forEach(b=>b.addEventListener('click',()=>{
+    const qa=b.parentElement; const ans=qa.querySelector('.ans'); const open=qa.classList.contains('open');
+    document.querySelectorAll('.qa').forEach(x=>{ x.classList.remove('open'); x.querySelector('.ans').style.maxHeight=null; });
+    if(!open){ qa.classList.add('open'); ans.style.maxHeight=ans.scrollHeight+'px'; }
+  }));
+</script>
+</body>
+</html>

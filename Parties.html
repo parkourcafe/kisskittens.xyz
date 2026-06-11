@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>KISS KITTENS — Parties</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2040%2040%22%3E%3Crect%20width%3D%2240%22%20height%3D%2240%22%20rx%3D%2211%22%20fill%3D%22%230a0a0a%22%2F%3E%3Cg%20transform%3D%22translate(0%2C3.5)%22%3E%3Cpath%20d%3D%22M6%2015%20C9%2010%2013%209%2016%2011%20C17.5%2012%2018.6%2013.2%2020%2014.6%20C21.4%2013.2%2022.5%2012%2024%2011%20C27%209%2031%2010%2034%2015%20C30%2013.4%2026%2013.6%2022%2014.8%20C21%2015%2019%2015%2018%2014.8%20C14%2013.6%2010%2013.4%206%2015%20Z%22%20fill%3D%22%23f4f1ea%22%2F%3E%3Cpath%20d%3D%22M6%2015%20C11%2016.4%2015%2016.6%2020%2016.6%20C25%2016.6%2029%2016.4%2034%2015%20C32%2023%2027%2028%2020%2028.5%20C13%2028%208%2023%206%2015%20Z%22%20fill%3D%22%23ED0080%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E" />
+<link rel="stylesheet" href="kk.css" />
+<style>
+  .phero{ position:relative; min-height:72svh; display:flex; align-items:flex-end; overflow:hidden; }
+  .phero .bg{ position:absolute; inset:0; z-index:0; }
+  .phero .bg img{ width:100%; height:100%; object-fit:cover; filter:grayscale(.5) contrast(1.08) brightness(.6); }
+  .phero .bg::after{ content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(0,0,0,.4),transparent 40%,rgba(0,0,0,.75) 85%,var(--bg)); }
+  .phero .inner{ position:relative; z-index:2; padding-bottom:7vh; width:100%; }
+  .phero h1{ font-family:var(--disp); font-weight:900; font-size:clamp(54px,11vw,150px); text-transform:uppercase; line-height:.86; letter-spacing:-.03em; }
+  .phero h1 em{ font-style:normal; color:var(--pink); }
+  .phero .lede{ margin-top:24px; }
+
+  .filterbar{ position:sticky; top:0; z-index:120; background:rgba(5,5,5,.92); backdrop-filter:blur(12px); border-bottom:1px solid var(--line); }
+  .filterbar .row{ display:flex; gap:10px; padding:18px 0; flex-wrap:wrap; align-items:center; }
+  .filterbar .lab{ font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--grey-3); margin-right:12px; }
+  .chip{ font-family:var(--sans); font-size:11px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; padding:11px 20px; border:1px solid var(--line); background:transparent; color:var(--grey); cursor:pointer; transition:.3s var(--ease); }
+  .chip:hover{ border-color:var(--pink); color:var(--white); }
+  .chip.active{ background:var(--pink); color:var(--white); border-color:var(--pink); }
+
+  section.blk{ position:relative; z-index:2; padding:90px 0 120px; background:var(--bg); }
+  .head{ margin-bottom:46px; }
+  .head h2{ font-family:var(--disp); font-weight:800; font-size:clamp(28px,4vw,52px); text-transform:uppercase; letter-spacing:-.02em; }
+
+  /* big party rows */
+  .plist{ display:flex; flex-direction:column; gap:16px; }
+  .prow{ display:grid; grid-template-columns:340px 1fr auto; gap:34px; align-items:center; border:1px solid var(--line); background:var(--bg-2); overflow:hidden; transition:border-color .4s var(--ease); }
+  .prow:hover{ border-color:rgba(255,255,255,.28); }
+  .prow .pic{ position:relative; height:230px; overflow:hidden; }
+  .prow .pic img{ width:100%; height:100%; object-fit:cover; filter:grayscale(.45) contrast(1.05) brightness(.78); transition:transform .8s var(--ease); }
+  .prow:hover .pic img{ transform:scale(1.06); }
+  .prow .pic .dd{ position:absolute; top:16px; left:16px; background:var(--black); text-align:center; padding:9px 13px; }
+  .prow .pic .dd .d{ font-family:var(--disp); font-weight:800; font-size:24px; line-height:1; }
+  .prow .pic .dd .m{ font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--pink); margin-top:3px; }
+  .prow .mid{ padding:24px 0; }
+  .prow .mid .city{ font-family:var(--disp); font-weight:800; font-size:clamp(28px,3vw,44px); text-transform:uppercase; line-height:.95; }
+  .prow .mid .ven{ font-size:13px; letter-spacing:.04em; color:var(--grey-2); margin-top:8px; }
+  .prow .mid .desc{ font-size:14px; color:var(--grey); margin-top:14px; max-width:52ch; }
+  .prow .mid .badges{ display:flex; gap:8px; margin-top:16px; }
+  .prow .mid .b{ font-size:10px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; padding:6px 11px; border:1px solid var(--line); color:var(--grey-2); }
+  .prow .mid .b.live{ background:var(--pink); color:#fff; border-color:var(--pink); }
+  .prow .act{ padding:0 34px; text-align:right; }
+  .prow .act .price{ font-family:var(--disp); font-weight:800; font-size:30px; }
+  .prow .act .price small{ font-family:var(--sans); font-size:12px; font-weight:500; color:var(--grey-2); display:block; letter-spacing:.04em; margin-bottom:14px; }
+  .prow.hide{ display:none; }
+  .prow.sold{ opacity:.55; }
+
+  /* how it works */
+  .how{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); }
+  .how .c{ background:var(--bg); padding:40px 32px; }
+  .how .c .n{ font-family:var(--disp); font-weight:800; font-size:14px; color:var(--pink); letter-spacing:.1em; }
+  .how .c h4{ font-family:var(--disp); font-weight:700; font-size:22px; text-transform:uppercase; margin:16px 0 10px; }
+  .how .c p{ font-size:14px; color:var(--grey-2); }
+
+  .joincta{ position:relative; overflow:hidden; padding:140px 0; text-align:center; }
+  .joincta .bg{ position:absolute; inset:0; z-index:0; }
+  .joincta .bg img{ width:100%; height:100%; object-fit:cover; filter:grayscale(.7) contrast(1.1) brightness(.4); }
+  .joincta .inner{ position:relative; z-index:2; }
+  .joincta h2{ font-family:var(--disp); font-weight:900; font-size:clamp(40px,7vw,104px); text-transform:uppercase; line-height:.9; letter-spacing:-.02em; }
+  .joincta h2 em{ font-style:normal; color:var(--pink); }
+  .joincta p{ color:var(--grey); margin:24px auto 36px; max-width:44ch; }
+
+  @media (max-width:860px){
+    .prow{ grid-template-columns:1fr; }
+    .prow .act{ padding:0 24px 28px; text-align:left; display:flex; align-items:center; justify-content:space-between; }
+    .prow .act .price small{ display:inline; margin:0 0 0 6px; }
+    .how{ grid-template-columns:1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+<nav class="nav" id="nav">
+  <a href="Home.html" class="mark"><span class="kk"><svg viewBox="0 0 40 40" aria-hidden="true"><g transform="translate(0,1.5)"><path d="M6 15 C9 10 13 9 16 11 C17.5 12 18.6 13.2 20 14.6 C21.4 13.2 22.5 12 24 11 C27 9 31 10 34 15 C30 13.4 26 13.6 22 14.8 C21 15 19 15 18 14.8 C14 13.6 10 13.4 6 15 Z" fill="#f4f1ea"/><path d="M6 15 C11 16.4 15 16.6 20 16.6 C25 16.6 29 16.4 34 15 C32 23 27 28 20 28.5 C13 28 8 23 6 15 Z" fill="#ED0080"/></g></svg></span><span style="color:#ED0080">KISS</span> KITTENS</a>
+  <div class="links">
+    <a href="Parties.html" class="active">Parties</a>
+    <a href="Membership.html">Membership</a>
+    <a href="Network.html">The Network</a>
+    <a href="Magazine.html">Magazine</a>
+    <a href="About.html">About</a>
+  </div>
+  <div class="nav-cta">
+    <a href="Membership.html" class="btn btn-pink">Become a Member</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+  </div>
+</nav>
+<div class="drawer" id="drawer">
+  <div class="dtop"><span class="mark" style="font-family:var(--disp);font-weight:900;font-size:18px;display:flex;gap:9px;align-items:center"><span class="kk-d"><svg viewBox="0 0 40 40" aria-hidden="true"><g transform="translate(0,1.5)"><path d="M6 15 C9 10 13 9 16 11 C17.5 12 18.6 13.2 20 14.6 C21.4 13.2 22.5 12 24 11 C27 9 31 10 34 15 C30 13.4 26 13.6 22 14.8 C21 15 19 15 18 14.8 C14 13.6 10 13.4 6 15 Z" fill="#f4f1ea"/><path d="M6 15 C11 16.4 15 16.6 20 16.6 C25 16.6 29 16.4 34 15 C32 23 27 28 20 28.5 C13 28 8 23 6 15 Z" fill="#ED0080"/></g></svg></span><span style="color:#ED0080">KISS</span> KITTENS</span><button id="closeBtn" style="display:block;background:none;border:none;color:#fff;font-size:26px;cursor:pointer">✕</button></div>
+  <div class="dlinks"><a href="Parties.html">Parties</a><a href="Membership.html">Membership</a><a href="Network.html">The Network</a><a href="Magazine.html">Magazine</a><a href="About.html">About</a></div>
+  <div class="dcta"><a href="Membership.html" class="btn btn-pink">Become a Member</a></div>
+</div>
+
+<header class="phero" data-screen-label="Parties / Hero">
+  <div class="bg"><img src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=1900&q=80" alt="" /></div>
+  <div class="inner shell">
+    <span class="eyebrow">Members &amp; approved guests only</span>
+    <h1>The <em>Parties.</em></h1>
+    <p class="lede">Masked. Intimate. Legendary. Hosted in secret venues across the world's boldest cities — and they sell out fast.</p>
+  </div>
+</header>
+
+<div class="filterbar">
+  <div class="shell"><div class="row">
+    <span class="lab">Filter</span>
+    <button class="chip active" data-city="all">All Cities</button>
+    <button class="chip" data-city="london">London</button>
+    <button class="chip" data-city="newyork">New York</button>
+    <button class="chip" data-city="la">Los Angeles</button>
+    <button class="chip" data-city="sydney">Sydney</button>
+  </div></div>
+</div>
+
+<section class="blk" data-screen-label="Parties / List">
+  <div class="shell">
+    <div class="head"><h2>Upcoming Nights</h2></div>
+    <div class="plist" id="plist">
+      <article class="prow" data-city="london">
+        <div class="pic"><img src="https://images.unsplash.com/photo-1543007630-9710e4a00a20?w=900&q=80" alt="" /><span class="dd"><span class="d">21</span><span class="m">Jun</span></span></div>
+        <div class="mid"><div class="city">London</div><div class="ven">The Mayfair Mansion · Saturday · 9pm till late</div><p class="desc">Our flagship masked ball returns to a Mayfair townhouse. Three floors, live performance, and the rule that started it all — women lead.</p><div class="badges"><span class="b live">Tickets Live</span><span class="b">Black Tie · Masks</span></div></div>
+        <div class="act"><div class="price"><small>From</small>£180</div><a href="Membership.html" class="btn btn-pink">Get Tickets</a></div>
+      </article>
+      <article class="prow" data-city="newyork">
+        <div class="pic"><img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=900&q=80" alt="" /><span class="dd"><span class="d">11</span><span class="m">Jul</span></span></div>
+        <div class="mid"><div class="city">New York</div><div class="ven">A SoHo Loft · Friday · 10pm till late</div><p class="desc">Champagne, oysters and slow introductions high above the city. Our most intimate New York night yet — forty guests only.</p><div class="badges"><span class="b live">Tickets Live</span><span class="b">Cocktail · Masks</span></div></div>
+        <div class="act"><div class="price"><small>From</small>$170</div><a href="Membership.html" class="btn btn-pink">Get Tickets</a></div>
+      </article>
+      <article class="prow sold" data-city="la">
+        <div class="pic"><img src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=900&q=80" alt="" /><span class="dd"><span class="d">26</span><span class="m">Jul</span></span></div>
+        <div class="mid"><div class="city">Los Angeles</div><div class="ven">A Hills Villa · Saturday · 9pm till late</div><p class="desc">A villa, a pool, a DJ and one hundred remarkable people behind masks. This one always goes first.</p><div class="badges"><span class="b">Sold Out</span><span class="b">Resort · Masks</span></div></div>
+        <div class="act"><div class="price"><small>From</small>$190</div><a href="Membership.html" class="btn btn-ghost">Join Waitlist</a></div>
+      </article>
+      <article class="prow" data-city="sydney">
+        <div class="pic"><img src="https://images.unsplash.com/photo-1496440737103-cd596325d314?w=900&q=80" alt="" /><span class="dd"><span class="d">09</span><span class="m">Aug</span></span></div>
+        <div class="mid"><div class="city">Sydney</div><div class="ven">A Bondi Penthouse · Saturday · 8pm till late</div><p class="desc">Sunset over the water, a rooftop of strangers about to become a circle. Our debut Sydney masquerade.</p><div class="badges"><span class="b live">Waitlist Open</span><span class="b">Glam · Masks</span></div></div>
+        <div class="act"><div class="price"><small>From</small>A$210</div><a href="Membership.html" class="btn btn-pink">Join Waitlist</a></div>
+      </article>
+      <article class="prow" data-city="london">
+        <div class="pic"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&q=80" alt="" /><span class="dd"><span class="d">23</span><span class="m">Aug</span></span></div>
+        <div class="mid"><div class="city">London</div><div class="ven">A Soho Townhouse · Friday · 8pm</div><p class="desc">The Long Table — one chef's menu, sixteen seats, and conversation cards that break every kind of ice.</p><div class="badges"><span class="b live">Tickets Live</span><span class="b">Dinner · Optional Masks</span></div></div>
+        <div class="act"><div class="price"><small>From</small>£140</div><a href="Membership.html" class="btn btn-pink">Get Tickets</a></div>
+      </article>
+    </div>
+    <p id="noresult" style="display:none;text-align:center;color:var(--grey-3);padding:50px 0">No nights in that city yet — join the waitlist and we'll bring one to you.</p>
+  </div>
+</section>
+
+<section class="blk" style="padding-top:0" data-screen-label="Parties / How">
+  <div class="shell">
+    <div class="head"><h2>How a Night Works</h2></div>
+    <div class="how">
+      <div class="c"><div class="n">01</div><h4>Apply</h4><p>Become a member, then request tickets to any night. Women and approved couples only.</p></div>
+      <div class="c"><div class="n">02</div><h4>Get Approved</h4><p>We confirm your place and share the secret venue 48 hours before — discretion is everything.</p></div>
+      <div class="c"><div class="n">03</div><h4>Mask Up</h4><p>Arrive, leave your name at the door, and let the mask do the talking. Consent always leads.</p></div>
+      <div class="c"><div class="n">04</div><h4>Belong</h4><p>What happens at a KK party stays there. You leave with stories you'll never tell — and a circle that's yours.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="joincta" data-screen-label="Parties / CTA">
+  <div class="bg"><img src="https://images.unsplash.com/photo-1485872299829-c673f5194813?w=1900&q=80" alt="" /></div>
+  <div class="inner shell">
+    <h2>A seat is <em>earned.</em></h2>
+    <p>Tickets are for members only. Apply today and we'll hold your place at the next night near you.</p>
+    <a href="Membership.html" class="btn btn-pink" style="font-size:14px;padding:20px 42px">Become a Member <span class="ar">→</span></a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="shell">
+    <div class="top">
+      <div><div class="mark"><span class="kk-f"><svg viewBox="0 0 40 40" aria-hidden="true"><g transform="translate(0,1.5)"><path d="M6 15 C9 10 13 9 16 11 C17.5 12 18.6 13.2 20 14.6 C21.4 13.2 22.5 12 24 11 C27 9 31 10 34 15 C30 13.4 26 13.6 22 14.8 C21 15 19 15 18 14.8 C14 13.6 10 13.4 6 15 Z" fill="#f4f1ea"/><path d="M6 15 C11 16.4 15 16.6 20 16.6 C25 16.6 29 16.4 34 15 C32 23 27 28 20 28.5 C13 28 8 23 6 15 Z" fill="#ED0080"/></g></svg></span><span style="color:#ED0080">KISS</span> KITTENS</div><p class="tag">The world's most exclusive parties and members' network — created by women, for women. Since 2005.</p><div class="social"><a href="#">IG</a><a href="#">X</a><a href="#">TT</a><a href="#">IN</a></div></div>
+      <div><h5>Explore</h5><ul><li><a href="Parties.html">Parties</a></li><li><a href="Membership.html">Membership</a></li><li><a href="Network.html">The Network</a></li><li><a href="Magazine.html">Magazine</a></li><li><a href="About.html">About</a></li></ul></div>
+      <div><h5>Members</h5><ul><li><a href="Membership.html">Apply Now</a></li><li><a href="#">Sign In</a></li><li><a href="Network.html">The App</a></li><li><a href="About.html">FAQ</a></li><li><a href="#">Contact</a></li></ul></div>
+      <div class="news"><h5>Get on the list</h5><p>Party drops, member stories and the occasional secret.</p><form onsubmit="return false"><input type="email" placeholder="Your email" /><button>Join</button></form></div>
+    </div>
+    <div class="bottom"><span>© 2026 Kiss Kittens — visual concept recreation. No affiliation; original wordmark &amp; placeholder imagery.</span><div class="lr"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Cookies</a></div></div>
+  </div>
+</footer>
+
+<script>
+  const nav=document.getElementById('nav');
+  addEventListener('scroll',()=>nav.classList.toggle('scrolled', scrollY>40));
+  const drawer=document.getElementById('drawer');
+  document.getElementById('menuBtn').addEventListener('click',()=>drawer.classList.add('open'));
+  document.getElementById('closeBtn').addEventListener('click',()=>drawer.classList.remove('open'));
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>drawer.classList.remove('open')));
+  const chips=document.querySelectorAll('.chip'); const rows=document.querySelectorAll('.prow'); const noresult=document.getElementById('noresult');
+  chips.forEach(c=>c.addEventListener('click',()=>{
+    chips.forEach(x=>x.classList.remove('active')); c.classList.add('active');
+    const city=c.dataset.city; let shown=0;
+    rows.forEach(r=>{ const m=city==='all'||r.dataset.city===city; r.classList.toggle('hide',!m); if(m)shown++; });
+    noresult.style.display=shown?'none':'block';
+  }));
+</script>
+</body>
+</html>

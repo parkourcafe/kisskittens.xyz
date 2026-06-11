@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>VELOUR — Rituals</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='11' fill='%230a0a0a'/%3E%3Cg transform='translate(0,3.5)'%3E%3Cpath d='M6 15 C9 10 13 9 16 11 C17.5 12 18.6 13.2 20 14.6 C21.4 13.2 22.5 12 24 11 C27 9 31 10 34 15 C30 13.4 26 13.6 22 14.8 C21 15 19 15 18 14.8 C14 13.6 10 13.4 6 15 Z' fill='%23f4f1ea'/%3E%3Cpath d='M6 15 C11 16.4 15 16.6 20 16.6 C25 16.6 29 16.4 34 15 C32 23 27 28 20 28.5 C13 28 8 23 6 15 Z' fill='%23ED0080'/%3E%3C/g%3E%3C/svg%3E" />
+<link rel="stylesheet" href="kk.css" />
+<style>
+  .nav .mark .lips{ width:40px; height:34px; flex:none; }
+  .nav .mark .wm{ font-family:var(--disp); font-weight:800; font-size:20px; text-transform:uppercase; }
+  .phero{ position:relative; min-height:62svh; display:flex; align-items:flex-end; overflow:hidden; }
+  .phero .bg{ position:absolute; inset:0; z-index:0; }
+  .phero .bg img{ width:100%; height:100%; object-fit:cover; filter:grayscale(.5) contrast(1.05) brightness(.6); transform-origin:center; animation:kb 26s ease-in-out infinite alternate; }
+  @keyframes kb{ 0%{transform:scale(1.05)}100%{transform:scale(1.18) translate(-2%,-2%)} }
+  .phero .bg::after{ content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(0,0,0,.45),transparent 40%,rgba(0,0,0,.8) 85%,var(--bg)); }
+  .phero .inner{ position:relative; z-index:2; padding-bottom:7vh; width:100%; }
+  .phero h1{ font-family:var(--disp); font-weight:900; font-size:clamp(50px,10vw,150px); text-transform:uppercase; line-height:.86; letter-spacing:-.03em; }
+  .phero h1 .px{ color:var(--pink); }
+  .phero .lede{ margin-top:22px; }
+  @media (prefers-reduced-motion:reduce){ .phero .bg img{ animation:none; } }
+
+  .filterbar{ position:sticky; top:0; z-index:120; background:rgba(5,5,5,.92); backdrop-filter:blur(12px); border-bottom:1px solid var(--line); }
+  .filterbar .row{ display:flex; gap:9px; padding:18px 0; flex-wrap:wrap; align-items:center; }
+  .filterbar .lab{ font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--grey-3); margin-right:12px; font-weight:600; }
+  .chip{ font-family:var(--sans); font-size:11px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; padding:11px 20px; border:1px solid var(--line); background:transparent; color:var(--grey); cursor:pointer; transition:.3s var(--ease); }
+  .chip:hover{ border-color:var(--pink); color:#fff; } .chip.active{ background:var(--pink); color:#fff; border-color:var(--pink); }
+
+  section.blk{ position:relative; z-index:2; padding:90px 0 120px; background:var(--bg); }
+  .rlist{ display:flex; flex-direction:column; gap:16px; }
+  .rrow{ display:grid; grid-template-columns:300px 1fr auto; gap:36px; align-items:center; border:1px solid var(--line); background:var(--bg-2); overflow:hidden; transition:border-color .4s var(--ease); }
+  .rrow:hover{ border-color:var(--pink); }
+  .rrow .pic{ position:relative; height:230px; overflow:hidden; }
+  .rrow .pic img{ width:100%; height:100%; object-fit:cover; filter:grayscale(.5) contrast(1.05) brightness(.78); transition:transform .8s var(--ease); }
+  .rrow:hover .pic img{ transform:scale(1.06); }
+  .rrow .pic .cat{ position:absolute; top:14px; left:14px; background:var(--black); color:var(--pink); font-size:9px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; padding:6px 11px; }
+  .rrow .mid{ padding:28px 0; }
+  .rrow .mid h3{ font-family:var(--disp); font-weight:800; font-size:clamp(26px,3vw,40px); text-transform:uppercase; line-height:1; }
+  .rrow .mid .dur{ font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--grey-2); margin-top:10px; display:flex; gap:14px; font-weight:600; }
+  .rrow .mid p{ font-size:14px; color:var(--grey); margin-top:16px; max-width:54ch; line-height:1.6; }
+  .rrow .act{ padding:0 34px; text-align:right; }
+  .rrow .act .price{ font-family:var(--disp); font-weight:800; font-size:30px; color:var(--pink); margin-bottom:14px; }
+  .rrow.hide{ display:none; }
+  .incl{ margin-top:70px; border:1px solid var(--line); padding:46px; display:grid; grid-template-columns:auto 1fr; gap:36px; align-items:center; background:var(--bg-2); }
+  .incl .lips{ width:64px; height:54px; }
+  .incl h3{ font-family:var(--disp); font-weight:800; font-size:24px; text-transform:uppercase; margin-bottom:12px; }
+  .incl p{ color:var(--grey-2); font-size:15px; max-width:70ch; }
+  .incl .list{ display:flex; gap:26px; margin-top:18px; flex-wrap:wrap; }
+  .incl .list span{ font-size:11px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--grey); display:flex; gap:9px; align-items:center; }
+  .incl .list span::before{ content:"✦"; color:var(--pink); }
+  .bookcta{ position:relative; overflow:hidden; padding:130px 0; text-align:center; }
+  .bookcta .bg{ position:absolute; inset:0; z-index:0; } .bookcta .bg img{ width:100%; height:100%; object-fit:cover; filter:grayscale(.6) contrast(1.06) brightness(.4); }
+  .bookcta .inner{ position:relative; z-index:2; } .bookcta h2{ font-family:var(--disp); font-weight:900; font-size:clamp(40px,6vw,96px); text-transform:uppercase; line-height:.92; }
+  .bookcta h2 .px{ color:var(--pink); } .bookcta p{ color:var(--grey); margin:22px auto 34px; max-width:44ch; }
+  @media (max-width:860px){ .rrow{ grid-template-columns:1fr; } .rrow .act{ padding:0 24px 26px; text-align:left; display:flex; align-items:center; justify-content:space-between; } .rrow .act .price{ margin:0; } .incl{ grid-template-columns:1fr; gap:22px; } }
+</style>
+</head>
+<body>
+<nav class="nav" id="nav">
+  <a href="The House.html" class="mark"><svg class="lips" viewBox="0 0 40 34" aria-hidden="true"><path d="M6 15 C9 10 13 9 16 11 C17.5 12 18.6 13.2 20 14.6 C21.4 13.2 22.5 12 24 11 C27 9 31 10 34 15 C30 13.4 26 13.6 22 14.8 C21 15 19 15 18 14.8 C14 13.6 10 13.4 6 15 Z" fill="#f4f1ea"/><path d="M6 15 C11 16.4 15 16.6 20 16.6 C25 16.6 29 16.4 34 15 C32 23 27 28 20 28.5 C13 28 8 23 6 15 Z" fill="#ED0080"/></svg><span class="wm">Velour</span></a>
+  <div class="links"><a href="Rituals.html" class="active">Rituals</a><a href="Therapists.html">Therapists</a><a href="Journal.html">Journal</a><a href="The House.html#house">The House</a><a href="Contact.html">Contact</a></div>
+  <div class="nav-cta"><a href="Booking.html" class="btn btn-pink">Book a Ritual</a><button class="menu-btn" id="menuBtn" aria-label="Menu">☰</button></div>
+</nav>
+<div class="drawer" id="drawer">
+  <div class="dtop"><span style="font-family:var(--disp);font-weight:800;font-size:18px;text-transform:uppercase;display:flex;gap:10px;align-items:center"><svg width="34" height="29" viewBox="0 0 40 34"><path d="M6 15 C9 10 13 9 16 11 C17.5 12 18.6 13.2 20 14.6 C21.4 13.2 22.5 12 24 11 C27 9 31 10 34 15 C30 13.4 26 13.6 22 14.8 C21 15 19 15 18 14.8 C14 13.6 10 13.4 6 15 Z" fill="#f4f1ea"/><path d="M6 15 C11 16.4 15 16.6 20 16.6 C25 16.6 29 16.4 34 15 C32 23 27 28 20 28.5 C13 28 8 23 6 15 Z" fill="#ED0080"/></svg>Velour</span><button id="closeBtn" style="background:none;border:none;color:#fff;font-size:26px;cursor:pointer">✕</button></div>
+  <div class="dlinks"><a href="Rituals.html">Rituals</a><a href="Therapists.html">Therapists</a><a href="Journal.html">Journal</a><a href="The House.html#house">The House</a><a href="FAQ.html">FAQ</a><a href="Contact.html">Contact</a></div>
+  <div class="dcta"><a href="Booking.html" class="btn btn-pink">Book a Ritual</a></div>
+</div>
+
+<header class="phero" data-screen-label="Rituals / Hero">
+  <div class="bg"><img src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?w=1900&q=80" alt="" /></div>
+  <div class="inner shell"><span class="eyebrow">The Menu</span><h1>The <span class="px">Rituals.</span></h1><p class="lede">Twelve choreographies of touch, warmth and oil. Each built for a different need, every one unhurried. Choose your hour — or let your therapist guide you.</p></div>
+</header>
+
+<div class="filterbar"><div class="shell"><div class="row">
+  <span class="lab">Filter</span>
+  <button class="chip active" data-cat="all">All</button><button class="chip" data-cat="signature">Signature</button><button class="chip" data-cat="body">Body</button><button class="chip" data-cat="targeted">Targeted</button><button class="chip" data-cat="couples">Couples</button>
+</div></div></div>
+
+<section class="blk" data-screen-label="Rituals / List">
+  <div class="shell">
+    <div class="rlist" id="rlist">
+      <article class="rrow" data-cat="signature"><div class="pic"><img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=900&q=80" alt="" /><span class="cat">Signature</span></div><div class="mid"><h3>Le Velours</h3><div class="dur"><span>90 min</span><span>Full body</span><span>Rosewood oil</span></div><p>Our signature ritual. Long, enveloping strokes in warm hand-blended rosewood oil — the house at its most sensual and complete.</p></div><div class="act"><div class="price">€180</div><a href="Booking.html" class="btn btn-pink">Book</a></div></article>
+      <article class="rrow" data-cat="body"><div class="pic"><img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=900&q=80" alt="" /><span class="cat">Hot Stone</span></div><div class="mid"><h3>Pierres Chaudes</h3><div class="dur"><span>60 min</span><span>Back &amp; shoulders</span></div><p>Heated volcanic stones laid along the spine, melting tension you forgot you were holding. Deeply warming.</p></div><div class="act"><div class="price">€140</div><a href="Booking.html" class="btn btn-pink">Book</a></div></article>
+      <article class="rrow" data-cat="body"><div class="pic"><img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?w=900&q=80" alt="" /><span class="cat">Deep Tissue</span></div><div class="mid"><h3>Profond</h3><div class="dur"><span>120 min</span><span>Full body</span><span>Firm</span></div><p>A deep, deliberate ritual for the body that works hard. Slow, sustained pressure and total release. Our longest hour.</p></div><div class="act"><div class="price">€240</div><a href="Booking.html" class="btn btn-pink">Book</a></div></article>
+      <article class="rrow" data-cat="body"><div class="pic"><img src="https://images.unsplash.com/photo-1556760544-74068565f05c?w=900&q=80" alt="" /><span class="cat">Lymphatic</span></div><div class="mid"><h3>Aube</h3><div class="dur"><span>60 min</span><span>Full body</span><span>Light</span></div><p>A featherlight lymphatic ritual to wake the body and brighten the skin. Best at first light.</p></div><div class="act"><div class="price">€130</div><a href="Booking.html" class="btn btn-pink">Book</a></div></article>
+      <article class="rrow" data-cat="targeted"><div class="pic"><img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=900&q=80" alt="" /><span class="cat">Head &amp; Neck</span></div><div class="mid"><h3>Crâne &amp; Nuque</h3><div class="dur"><span>45 min</span><span>Scalp · neck · shoulders</span></div><p>A focused ritual for the screen-weary — scalp, neck and shoulders, with warm oil and slow pressure.</p></div><div class="act"><div class="price">€95</div><a href="Booking.html" class="btn btn-pink">Book</a></div></article>
+      <article class="rrow" data-cat="couples"><div class="pic"><img src="https://images.unsplash.com/photo-1583416750470-965b2707b355?w=900&q=80" alt="" /><span class="cat">Couples</span></div><div class="mid"><h3>Duo</h3><div class="dur"><span>90 min</span><span>Two guests</span><span>Side by side</span></div><p>Two therapists, two tables, one room. Le Velours for two — share the hour, keep the afterglow.</p></div><div class="act"><div class="price">€320</div><a href="Booking.html" class="btn btn-pink">Book</a></div></article>
+    </div>
+    <p id="noresult" style="display:none;text-align:center;color:var(--grey-3);padding:50px 0">Nothing in that category yet.</p>
+    <div class="incl">
+      <svg class="lips" viewBox="0 0 40 34" aria-hidden="true"><path d="M6 15 C9 10 13 9 16 11 C17.5 12 18.6 13.2 20 14.6 C21.4 13.2 22.5 12 24 11 C27 9 31 10 34 15 C30 13.4 26 13.6 22 14.8 C21 15 19 15 18 14.8 C14 13.6 10 13.4 6 15 Z" fill="#f4f1ea"/><path d="M6 15 C11 16.4 15 16.6 20 16.6 C25 16.6 29 16.4 34 15 C32 23 27 28 20 28.5 C13 28 8 23 6 15 Z" fill="#ED0080"/></svg>
+      <div><h3>Every ritual includes</h3><p>However long your hour, the house holds you the same way — from the threshold to the afterglow.</p><div class="list"><span>Private warmed suite</span><span>Herbal welcome tea</span><span>Hand-blended oils</span><span>Consultation</span><span>Unhurried rest after</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="bookcta" data-screen-label="Rituals / CTA">
+  <div class="bg"><img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=1900&q=80" alt="" /></div>
+  <div class="inner shell"><span class="eyebrow" style="display:inline-block">By appointment</span><h2 style="margin-top:18px">Found your <span class="px">hour?</span></h2><p>Choose your therapist and time — we'll prepare the room.</p><a href="Booking.html" class="btn btn-pink" style="font-size:13px;padding:20px 42px">Book a Ritual <span class="ar">→</span></a></div>
+</section>
+
+<footer class="footer">
+  <div class="shell">
+    <div class="top">
+      <div><div class="mark" style="font-family:var(--disp);font-weight:800;font-size:30px;text-transform:uppercase;display:flex;gap:12px;align-items:center"><svg width="40" height="34" viewBox="0 0 40 34"><path d="M6 15 C9 10 13 9 16 11 C17.5 12 18.6 13.2 20 14.6 C21.4 13.2 22.5 12 24 11 C27 9 31 10 34 15 C30 13.4 26 13.6 22 14.8 C21 15 19 15 18 14.8 C14 13.6 10 13.4 6 15 Z" fill="#f4f1ea"/><path d="M6 15 C11 16.4 15 16.6 20 16.6 C25 16.6 29 16.4 34 15 C32 23 27 28 20 28.5 C13 28 8 23 6 15 Z" fill="#ED0080"/></svg>Velour</div><p class="tag">A private house of restorative touch. Bespoke massage and ritual, by appointment — in quiet luxury.</p><div class="social"><a href="#">IG</a><a href="#">FB</a><a href="#">in</a></div></div>
+      <div><h5>Explore</h5><ul><li><a href="Rituals.html">Rituals</a></li><li><a href="Therapists.html">Therapists</a></li><li><a href="Journal.html">Journal</a></li><li><a href="The House.html#house">The House</a></li><li><a href="FAQ.html">FAQ</a></li></ul></div>
+      <div><h5>Visit</h5><ul><li><a href="Booking.html">Book a Ritual</a></li><li><a href="Gift.html">Gift Cards</a></li><li><a href="Contact.html">Contact</a></li><li><a href="Contact.html">Find Us</a></li></ul></div>
+      <div class="news"><h5>The House Letter</h5><p>Seasonal rituals and quiet invitations, now and then.</p><form onsubmit="return false"><input type="email" placeholder="Your email" /><button>Join</button></form></div>
+    </div>
+    <div class="bottom"><span>© 2026 Velour — House of Touch. By appointment only.</span><div class="lr"><a href="#">Privacy</a><a href="#">Terms</a><a href="FAQ.html">FAQ</a></div></div>
+  </div>
+</footer>
+
+<script>
+  const nav=document.getElementById('nav');
+  addEventListener('scroll',()=>nav.classList.toggle('scrolled', scrollY>40));
+  const drawer=document.getElementById('drawer');
+  document.getElementById('menuBtn').addEventListener('click',()=>drawer.classList.add('open'));
+  document.getElementById('closeBtn').addEventListener('click',()=>drawer.classList.remove('open'));
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>drawer.classList.remove('open')));
+  const chips=document.querySelectorAll('.chip'); const rows=document.querySelectorAll('.rrow'); const noresult=document.getElementById('noresult');
+  chips.forEach(c=>c.addEventListener('click',()=>{ chips.forEach(x=>x.classList.remove('active')); c.classList.add('active'); const cat=c.dataset.cat; let shown=0; rows.forEach(r=>{ const m=cat==='all'||r.dataset.cat===cat; r.classList.toggle('hide',!m); if(m)shown++; }); noresult.style.display=shown?'none':'block'; }));
+</script>
+</body>
+</html>

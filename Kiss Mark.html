@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>KISS KITTENS — The Kiss Mark</title>
+<link rel="stylesheet" href="kk.css" />
+<style>
+  body{ padding:0; }
+  .wrap{ max-width:1100px; margin:0 auto; padding:110px 48px 90px; }
+  .htop{ margin-bottom:52px; }
+  .htop .eyebrow{ display:inline-block; margin-bottom:16px; }
+  .htop h1{ font-family:var(--disp); font-weight:900; font-size:clamp(40px,7vw,90px); text-transform:uppercase; line-height:.86; letter-spacing:-.03em; }
+  .htop h1 em{ font-style:normal; color:var(--pink); }
+  .htop p{ color:var(--grey-2); max-width:58ch; margin-top:16px; }
+  .secttl{ font-family:var(--disp); font-weight:800; font-size:18px; text-transform:uppercase; letter-spacing:.02em; margin:0 0 22px; padding-bottom:14px; border-bottom:1px solid var(--line); }
+
+  /* hero stamp */
+  .heroLock{ border:1px solid var(--line); background:#0a0a0a; padding:70px 48px; display:flex; flex-direction:column; align-items:center; gap:30px; margin-bottom:58px; text-align:center; }
+  .heroLock .lips{ width:150px; height:auto; }
+  .heroLock .wm{ font-family:var(--disp); font-weight:900; font-size:clamp(38px,6.5vw,82px); text-transform:uppercase; line-height:.9; letter-spacing:-.02em; }
+  .heroLock .wm .kiss{ color:var(--pink); }
+  .heroLock .tagline{ font-size:12px; font-weight:600; letter-spacing:.34em; text-transform:uppercase; color:var(--grey-2); }
+
+  .grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:56px; }
+  .tile{ border:1px solid var(--line); overflow:hidden; }
+  .tile .canvas{ height:230px; display:grid; place-items:center; padding:24px; }
+  .tile .canvas svg.icon{ width:128px; height:128px; }
+  .bg-grid{ background:
+    linear-gradient(45deg,#1b1b1b 25%,transparent 25%,transparent 75%,#1b1b1b 75%) 0 0/22px 22px,
+    linear-gradient(45deg,#1b1b1b 25%,transparent 25%,transparent 75%,#1b1b1b 75%) 11px 11px/22px 22px,
+    #141414; }
+  .bg-black{ background:#0a0a0a; } .bg-pink{ background:var(--pink); }
+  .tile .meta{ padding:16px 20px; border-top:1px solid var(--line); display:flex; justify-content:space-between; gap:10px; align-items:center; }
+  .tile .meta .nm{ font-size:13px; font-weight:600; }
+  .tile .meta .tag{ font-size:10px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--grey-3); }
+
+  .row{ display:flex; align-items:center; gap:16px; }
+  .wordH{ font-family:var(--disp); font-weight:900; text-transform:uppercase; line-height:.86; letter-spacing:-.02em; }
+  .wordH .kiss{ color:var(--pink); }
+
+  .note{ border-left:2px solid var(--pink); padding:6px 0 6px 22px; color:var(--grey); font-size:15px; max-width:70ch; margin-bottom:18px; }
+  .note b{ color:#fff; font-weight:600; }
+  .back{ margin-top:8px; }
+  @media (max-width:860px){ .wrap{ padding:90px 22px 70px; } .grid{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="htop">
+    <span class="eyebrow">The Kiss Mark · Refined</span>
+    <h1>Sealed with<br>a <em>kiss.</em></h1>
+    <p>The two-tone lips, cleaned up. Ivory upper, hot-pink lower — drawn in the brand's sharp cupid-bow. Your playful, grown-up stamp for KISS KITTENS.</p>
+  </div>
+
+  <!-- HERO LOCKUP on black -->
+  <div class="heroLock">
+    <svg class="lips" viewBox="0 0 40 34" aria-hidden="true">
+      <path d="M6 15 C9 10 13 9 16 11 C17.5 12 18.6 13.2 20 14.6 C21.4 13.2 22.5 12 24 11 C27 9 31 10 34 15 C30 13.4 26 13.6 22 14.8 C21 15 19 15 18 14.8 C14 13.6 10 13.4 6 15 Z" fill="#f4f1ea"/>
+      <path d="M6 15 C11 16.4 15 16.6 20 16.6 C25 16.6 29 16.4 34 15 C32 23 27 28 20 28.5 C13 28 8 23 6 15 Z" fill="#ED0080"/>
+    </svg>
+    <div class="wm"><span class="kiss">Kiss</span> Kittens</div>
+    <div class="tagline">Where Women Come First</div>
+  </div>
+
+  <div class="note">The <b>KK monogram</b> stays your primary mark (app icon, favicon, nav). The <b>kiss</b> is the flirt — a stamp for social, stickers, invites and 18+ touchpoints. Two assets, one voice.</div>
+
+  <h2 class="secttl">The Mark</h2>
+  <div class="grid">
+    <div class="tile">
+      <div class="canvas bg-black">
+        <svg class="icon" viewBox="0 0 40 34"><path d="M6 15 C9 10 13 9 16 11 C17.5 12 18.6 13.2 20 14.6 C21.4 13.2 22.5 12 24 11 C27 9 31 10 34 15 C30 13.4 26 13.6 22 14.8 C21 15 19 15 18 14.8 C14 13.6 10 13.4 6 15 Z" fill="#f4f1ea"/><path d="M6 15 C11 16.4 15 16.6 20 16.6 C25 16.6 29 16.4 34 15 C32 23 27 28 20 28.5 C13 28 8 23 6 15 Z" fill="#ED0080"/></svg>
+      </div>
+      <div class="meta"><span class="nm">On black</span><span class="tag">Primary stamp</span></div>
+    </div>
+    <div class="tile">
+      <div class="canvas bg-grid">
+        <svg class="icon" viewBox="0 0 40 40"><rect width="40" height="40" rx="11" fill="#ED0080"/><g transform="translate(0,3)"><path d="M6 15 C9 10 13 9 16 11 C17.5 12 18.6 13.2 20 14.6 C21.4 13.2 22.5 12 24 11 C27 9 31 10 34 15 C30 13.4 26 13.6 22 14.8 C21 15 19 15 18 14.8 C14 13.6 10 13.4 6 15 Z" fill="#f4f1ea"/><path d="M6 15 C11 16.4 15 16.6 20 16.6 C25 16.6 29 16.4 34 15 C32 23 27 28 20 28.5 C13 28 8 23 6 15 Z" fill="#0a0a0a"/></g></svg>
+      </div>
+      <div class="meta"><span class="nm">Pink badge</span><span class="tag">Ivory + black</span></div>
+    </div>
+    <div class="tile">
+      <div class="canvas bg-black">
+        <svg class="icon" viewBox="0 0 40 34"><path d="M6 15 C9 10 13 9 16 11 C17.5 12 18.6 13.2 20 14.6 C21.4 13.2 22.5 12 24 11 C27 9 31 10 34 15 C30 13.4 26 13.6 22 14.8 C21 15 19 15 18 14.8 C14 13.6 10 13.4 6 15 Z" fill="#fff"/><path d="M6.5 16.4 C11 17.7 15 17.9 20 17.9 C25 17.9 29 17.7 33.5 16.4 C31.6 23.6 27 28 20 28.5 C13 28 8.4 23.6 6.5 16.4 Z" fill="#fff"/></svg>
+      </div>
+      <div class="meta"><span class="nm">Mono · white</span><span class="tag">One colour</span></div>
+    </div>
+  </div>
+
+  <h2 class="secttl">Horizontal Lockup</h2>
+  <div class="grid" style="grid-template-columns:1fr">
+    <div class="tile">
+      <div class="canvas bg-black" style="height:170px">
+        <div class="row">
+          <svg style="width:64px;height:auto" viewBox="0 0 40 34"><path d="M6 15 C9 10 13 9 16 11 C17.5 12 18.6 13.2 20 14.6 C21.4 13.2 22.5 12 24 11 C27 9 31 10 34 15 C30 13.4 26 13.6 22 14.8 C21 15 19 15 18 14.8 C14 13.6 10 13.4 6 15 Z" fill="#f4f1ea"/><path d="M6 15 C11 16.4 15 16.6 20 16.6 C25 16.6 29 16.4 34 15 C32 23 27 28 20 28.5 C13 28 8 23 6 15 Z" fill="#ED0080"/></svg>
+          <div class="wordH" style="font-size:40px"><span class="kiss">Kiss</span> Kittens</div>
+        </div>
+      </div>
+      <div class="meta"><span class="nm">Stamp + wordmark</span><span class="tag">For 18+ / social</span></div>
+    </div>
+  </div>
+
+  <div class="back"><a href="Home.html" class="btn btn-ghost">← Back to site</a></div>
+</div>
+</body>
+</html>
